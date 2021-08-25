@@ -10,4 +10,5 @@
     </swiper>
     <g-category-grid grid="{{categoryGrid}}"></g-category-grid>
     <image class="activity" src="{{activityD.entrance_img}}" />
+    <g-spu-scroll spuList="{{themeESpuList}}" theme="{{topThemeE}}"></g-spu-scroll>
 </view>
