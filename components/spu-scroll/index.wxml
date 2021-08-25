@@ -1,4 +1,5 @@
 <!--components/spu-scroll/index.wxml-->
+<wxs src="/miniprogram_npm/lin-ui/filter/string.wxs" module="s"></wxs>
 <view class="container">
     <image class="title" src="{{theme.title_img}}"/>
     <scroll-view scroll-x="{{true}}" class="scroll-view">
@@ -9,7 +10,7 @@
                     <l-price value="{{item.price}}"
                     l-value-class="price-value"
                     l-unit-class="price-unit"></l-price>
-                    <text class="spu-text">{{item.title}}</text>
+                    <text class="spu-text">{{item.title.length > 8? s.substring(item.title,0,7) + '...':item.title}}</text>
                 </view>
             </block>
         </view>
