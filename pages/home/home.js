@@ -13,6 +13,8 @@ Page({
     data: {
         topThemeA:null,
         topThemeE:null,
+        topThemeF:null,
+        bannerG:null,
         themeESpuList:[],
         bannerB: null,
         categoryGrid: [],
@@ -31,6 +33,8 @@ Page({
         await theme.getThemes()
         var topThemeA = theme.getHomeLocationA()
         var topThemeE = theme.getHomeLocationE()
+        var topThemeF = theme.getHomeLocationF()
+        var bannerG = await Banner.getHomeLocationG()
         var themeEWithSpu = await theme.getHomeLocationEWithSpu()
         var themeESpuList = []
         if(themeEWithSpu){
@@ -42,6 +46,8 @@ Page({
         this.setData({
             topThemeA,
             topThemeE,
+            topThemeF,
+            bannerG,
             themeESpuList,
             bannerB: bannerB,
             categoryGrid,
