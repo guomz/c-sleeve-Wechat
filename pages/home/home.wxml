@@ -13,4 +13,8 @@
     <g-spu-scroll spuList="{{themeESpuList}}" theme="{{topThemeE}}"></g-spu-scroll>
     <image src="{{topThemeF.entrance_img}}" class="quality" />
     <g-hot-list banner="{{bannerG}}"></g-hot-list>
+    <image class="fashion" src="{{topThemeH.entrance_img}}" />
+    <view class="spu-bottom">
+        <image class="title-spu-bottom" src="{{}}" />
+    </view>
 </view>
