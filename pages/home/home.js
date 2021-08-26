@@ -3,6 +3,8 @@ import {Theme} from '../../model/theme'
 import {Banner} from '../../model/banner'
 import {Category} from '../../model/category'
 import {Activity} from '../../model/activity'
+import {SpuPaging} from '../../model/spu-paging'
+import {Paging} from '../../utils/paging'
 
 
 Page({
@@ -19,7 +21,8 @@ Page({
         themeESpuList:[],
         bannerB: null,
         categoryGrid: [],
-        activityD: null
+        activityD: null,
+        pagingData:null
     },
 
     /**
@@ -45,6 +48,9 @@ Page({
         var bannerB = await Banner.getHomeLocationB()
         var categoryGrid = await Category.getHomeLocationC()
         var activityD = await Activity.getHomeLocationD()
+
+        this.initBottomSpuList()
+
         this.setData({
             topThemeA,
             topThemeE,
@@ -55,6 +61,14 @@ Page({
             bannerB: bannerB,
             categoryGrid,
             activityD
+        })
+    },
+
+    async initBottomSpuList(){
+        let lastestPaging = SpuPaging.getLatestPaging()
+        let pagingData = await lastestPaging.getMoreData()
+        this.setData({
+            pagingData
         })
     },
 
