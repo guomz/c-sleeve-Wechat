@@ -10,7 +10,9 @@ Component({
     observers: {
         'data': function(data){
             if(data && data.tags){
-                this.data.tags = data.tags.split('$')
+                this.setData({
+                    tags: data.tags.split('$')
+                })
             }
             
         }
