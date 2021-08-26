@@ -16,5 +16,7 @@
     <image class="fashion" src="{{topThemeH.entrance_img}}" />
     <view class="spu-bottom">
         <image class="title-spu-bottom" src="{{}}" />
+        <l-water-flow generic:l-water-flow-item="g-spu-preview"></l-water-flow>
     </view>
+    <l-loadmore show="{{true}}" type="{{loadMoreType}}"></l-loadmore>
 </view>

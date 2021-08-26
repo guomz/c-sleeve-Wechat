@@ -22,7 +22,8 @@ Page({
         bannerB: null,
         categoryGrid: [],
         activityD: null,
-        pagingData:null
+        latestPaging:null,
+        loadMoreType: 'loading'
     },
 
     /**
@@ -49,7 +50,7 @@ Page({
         var categoryGrid = await Category.getHomeLocationC()
         var activityD = await Activity.getHomeLocationD()
 
-        this.initBottomSpuList()
+        await this.initBottomSpuList()
 
         this.setData({
             topThemeA,
@@ -65,10 +66,14 @@ Page({
     },
 
     async initBottomSpuList(){
-        let lastestPaging = SpuPaging.getLatestPaging()
-        let pagingData = await lastestPaging.getMoreData()
+        let latestPaging = SpuPaging.getLatestPaging()
+        let pagingData = await latestPaging.getMoreData()
+        if(!pagingData){
+            return
+        }
+        wx.lin.renderWaterFlow(pagingData.items)
         this.setData({
-            pagingData
+            paging: latestPaging
         })
     },
 
@@ -110,8 +115,21 @@ Page({
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
-
+    onReachBottom: async function () {
+        let paging = this.data.paging
+        if(paging.moreData){
+            let newPaging = await paging.getMoreData()
+            wx.lin.renderWaterFlow(newPaging.items)
+            if(!paging.moreData){
+                this.setData({
+                    loadMoreType: 'end'
+                })
+            }
+        }else{
+            this.setData({
+                loadMoreType: 'end'
+            })
+        }
     },
 
     /**

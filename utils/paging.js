@@ -9,7 +9,7 @@ class Paging{
     isLocked = false
     currentData = []
 
-    constructor(req, start=0, count=5){
+    constructor({req, start=0, count=5}){
         this.start = start
         this.count = count
         this.req = req
@@ -23,9 +23,9 @@ class Paging{
         if(!this.moreData){
             return null
         }
-        this._initUrl()
+        const currentUrl = this._initUrl()
         const data = await Http.request({
-            url: this.url,
+            url: currentUrl,
             data: this.req.data
         })
         this.currentData = this.currentData.concat(data.items)
@@ -45,9 +45,9 @@ class Paging{
     _initUrl(){
         let args = `start=${this.start}&count=${this.count}`
         if(this.url.indexOf('?') === -1){
-            this.url = this.url.concat('?' + args)
+            return this.url.concat('?' + args)
         }else{
-            this.url = this.url.concat('&' + args)
+            return this.url.concat('&' + args)
         }
     }
 
