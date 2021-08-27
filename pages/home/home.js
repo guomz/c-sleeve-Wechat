@@ -4,8 +4,6 @@ import {Banner} from '../../model/banner'
 import {Category} from '../../model/category'
 import {Activity} from '../../model/activity'
 import {SpuPaging} from '../../model/spu-paging'
-import {Paging} from '../../utils/paging'
-
 
 Page({
 

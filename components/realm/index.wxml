@@ -1,0 +1,9 @@
+<!--components/realm/index.wxml-->
+<view class="container">
+    <view class="">
+        <image class="" src=""/>
+    </view>
+    <block wx:for="{{}}">
+        <g-fence></g-fence>
+    </block>
+</view>
