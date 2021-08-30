@@ -1,12 +1,9 @@
 class Fence{
 
-    key
-    keyId
-    values = []
+    valueTitle=[]
 
-    constructor(keyId, key){
-        this.key = key
-        this.keyId = keyId
+    pushValueTitle(value){
+        this.valueTitle.push(value)
     }
 }
 

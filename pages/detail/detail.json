@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "g-realm": "/components/realm/index"
+  }
 }

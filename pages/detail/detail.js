@@ -1,6 +1,7 @@
 // pages/detail/detail.js
 import {Fence} from '../../model/fence'
 import {FenceGroup} from '../../model/fence-group'
+import {Spu} from '../../model/spu'
 
 Page({
 
@@ -8,14 +9,17 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        spu: null
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-
+    onLoad: async function (options) {
+        const spu = await Spu.getSpuDetail(options.id)
+        this.setData({
+            spu
+        })
     },
 
     /**

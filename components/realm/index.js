@@ -1,10 +1,12 @@
 // components/realm/index.js
+import {FenceGroup} from '../../model/fence-group'
+
 Component({
     /**
      * 组件的属性列表
      */
     properties: {
-
+        spu: Object
     },
 
     /**
@@ -12,6 +14,18 @@ Component({
      */
     data: {
 
+    },
+
+    observers: {
+        'spu': function(spu){
+            if(!spu){
+                return
+            }
+
+            const fenceGroup = new FenceGroup(spu, spu.sku_list)
+            fenceGroup.initFences()
+            console.log(fenceGroup)
+        }
     },
 
     /**
