@@ -21,6 +21,18 @@ class Matrix{
             }
         }
     }
+
+    traverseVer2(){
+        const afterTraverseArr = []
+        for(let j = 0; j < this._getColumnNum(); j ++){
+            afterTraverseArr[j] = []
+            for(let i = 0; i < this._getRowNum(); i ++){
+                let element = this.m[i][j]
+                afterTraverseArr[j][i] = element
+            }
+        }
+        return afterTraverseArr
+    }
 }
 
 export{

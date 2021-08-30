@@ -3,7 +3,10 @@
     <view class="">
         <image class="" src=""/>
     </view>
-    <block wx:for="{{}}">
-        <g-fence></g-fence>
+    <block wx:for="{{fences}}">
+        <g-fence fence="{{item}}"></g-fence>
     </block>
+    <view class="counter-container">
+        
+    </view>
 </view>

@@ -4,6 +4,7 @@ import {Fence} from '../model/fence'
 class FenceGroup{
     spu
     skuList
+    fences=[]
 
     constructor(spu, skuList){
         this.spu = spu
@@ -13,19 +14,18 @@ class FenceGroup{
     initFences(){
         const matrix = this._createMatrix()
         const fences = []
-        let currentJ = -1
-        matrix.traverse((element, i, j)=> {
-            if(currentJ != j){
-                currentJ = j
-                fences[currentJ] = this._createFence(element)
-            }
-            fences[currentJ].pushValueTitle(element.value)
-        })
+        const AT = matrix.traverseVer2()
+        for(let specs of AT){
+            const fence = this._createFence(specs)
+            fence.init()
+            fences.push(fence)
+        }
         console.log(fences)
+        this.fences = fences
     }
 
-    _createFence(element){
-        const fence = new Fence()
+    _createFence(specs){
+        const fence = new Fence(specs)
         return fence
     }
 
