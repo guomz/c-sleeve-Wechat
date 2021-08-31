@@ -3,7 +3,7 @@ import {Fence} from '../model/fence'
 
 class FenceGroup{
     spu
-    skuList
+    skuList=[]
     fences=[]
 
     constructor(spu, skuList){
@@ -20,7 +20,6 @@ class FenceGroup{
             fence.init()
             fences.push(fence)
         }
-        console.log(fences)
         this.fences = fences
     }
 

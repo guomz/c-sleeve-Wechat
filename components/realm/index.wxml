@@ -3,8 +3,8 @@
     <view class="">
         <image class="" src=""/>
     </view>
-    <block wx:for="{{fences}}">
-        <g-fence fence="{{item}}"></g-fence>
+    <block wx:for="{{fences}}" wx:key="{{index}}">
+        <g-fence fence="{{item}}" x="{{index}}" bind:celltap="onCellTap"></g-fence>
     </block>
     <view class="counter-container">
         

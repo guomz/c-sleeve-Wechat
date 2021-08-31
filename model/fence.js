@@ -14,11 +14,8 @@ class Fence{
     }
 
     init(){
-        // for(let spec of this.specs){
-        //     const cell = new Cell(spec)
-        //     this.cells.push(cell)
-        // }
         this._initCell()
+        console.log(this.cells)
     }
 
     _initCell(){
@@ -28,7 +25,7 @@ class Fence{
             })
             //去重
             if(existed){
-                return
+                continue
             }
             const cell = new Cell(spec)
             this.cells.push(cell)

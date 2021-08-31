@@ -3,7 +3,7 @@
     <view class="title">{{fence.title}}</view>
     <view class="row-container">
         <block wx:for="{{fence.cells}}" wx:key="{{index}}">
-            <g-cell class="cell" cell="{{item}}"></g-cell>
+            <g-cell class="cell" cell="{{item}}" x="{{x}}" y="{{index}}"></g-cell>
         </block>
         <view class="hr"></view>
     </view>
