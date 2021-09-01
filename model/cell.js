@@ -6,10 +6,12 @@ class Cell{
     id
     status = CellStatus.WAITING
     spec
+    key_id
 
     constructor(spec){
         this.title = spec.value
         this.id = spec.value_id
+        this.key_id = spec.key_id
         this.spec = spec
     }
 

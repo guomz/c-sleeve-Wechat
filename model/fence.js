@@ -15,7 +15,6 @@ class Fence{
 
     init(){
         this._initCell()
-        console.log(this.cells)
     }
 
     _initCell(){

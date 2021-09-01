@@ -13,10 +13,16 @@ class Judger{
     constructor(fenceGroup){
         this.fenceGroup = fenceGroup
         this._initPathDict()
-        // console.log(this.allSegmentList)
         this.skuPending = new SkuPending()
+        // 检查是否有默认sku
+        const defaultSku = this.fenceGroup.getDefaultSku()
+        if(defaultSku){
+            this.skuPending.initDefaultSkuPending(defaultSku,this.fenceGroup)
+        }
+        console.log(fenceGroup)
     }
 
+    //初始化路径字典
     _initPathDict(){
         this.fenceGroup.skuList.forEach(sku => {
             const skuCode = new SkuCode(sku.code)
@@ -27,14 +33,10 @@ class Judger{
 
     //有cell被点击时调用
     judge(cell, x, y){
-        //this.fenceGroup.fences[x].cells[y].changeStatus()
         this._changeCellStatus(cell, x, y)
         //1-42 2-56 ...
         const inputList = this.skuPending.generateCellCodeList()
         this._refreshAllCell(inputList)
-        // this.fenceGroup.getEach((cell, x, y) => {
-        //     this._findInitialPath(cell, x,y)
-        // })
     }
 
     //每次点击刷新全部cell的可选状态

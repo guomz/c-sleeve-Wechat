@@ -12,6 +12,18 @@ class SkuPending{
         this.pending[x] = null
     }
 
+    initDefaultSkuPending(sku, fenceGroup){
+        for(let i = 0; i < sku.specs.length; i ++){
+            const spec = sku.specs[i]
+            fenceGroup.getEach((cell, x, y) => {
+                if(cell.key_id == spec.key_id && cell.id == spec.value_id){
+                    cell.status = CellStatus.SELECTED
+                    this.insertCell(cell, i)
+                }
+            })
+        }
+    }
+
     generateCellCodeList(){
         const cellCodeArr=[]
         for(let i = 0; i < this.pending.length; i ++){

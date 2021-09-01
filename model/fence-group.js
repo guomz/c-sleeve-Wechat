@@ -31,6 +31,13 @@ class FenceGroup{
         }
     }
 
+    getDefaultSku(){
+        if(this.spu.default_sku_id){
+            return this.skuList.find(sku => sku.id === this.spu.default_sku_id)
+        }
+        return null
+    }
+
     _createFence(specs){
         const fence = new Fence(specs)
         return fence

@@ -26,11 +26,13 @@ Component({
 
             const fenceGroup = new FenceGroup(spu, spu.sku_list)
             fenceGroup.initFences()
-            this.bindInitData(fenceGroup)
+            //this.bindInitData(fenceGroup)
 
             const judger = new Judger(fenceGroup)
+            //应对默认sku重新载入fences
             this.setData({
-                judger
+                judger,
+                fences: fenceGroup.fences
             })
         }
     },
