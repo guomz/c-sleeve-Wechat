@@ -14,12 +14,23 @@ class Judger{
         this.fenceGroup = fenceGroup
         this._initPathDict()
         this.skuPending = new SkuPending()
-        // 检查是否有默认sku
+        // 检查是否有默认sku并初始化
+        this._initDefaultSku()
+    }
+
+    _initDefaultSku(){
         const defaultSku = this.fenceGroup.getDefaultSku()
         if(defaultSku){
-            this.skuPending.initDefaultSkuPending(defaultSku,this.fenceGroup)
+            //执行若干次judge方法来达到默认sku的选中效果
+            for(let spec of defaultSku.specs){
+                this.fenceGroup.getEach((cell, i, j) => {
+                    if(spec.key_id == cell.key_id && spec.value_id == cell.id){
+                        this.judge(cell, i, j)
+                    }
+                })
+            }
+            
         }
-        console.log(fenceGroup)
     }
 
     //初始化路径字典
@@ -130,6 +141,9 @@ class Judger{
     }
 
     _changeCellStatus(cell, x, y){
+        // if(!cell || !x || !y){
+        //     return
+        // }
         const realCell = this.fenceGroup.fences[x].cells[y]
         if(cell.status === CellStatus.WAITING){
             //将该行其他被选的元素置为等待
