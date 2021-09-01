@@ -61,7 +61,6 @@ class Judger{
             }else{
                 usableLineList = this._getUsableCellByLine(inputList, fence.id)
             }
-            console.log(usableLineList)
             //更新当前行元素可选状态
             this._changeCellStatusByLine(usableLineList, fence.id)
         }

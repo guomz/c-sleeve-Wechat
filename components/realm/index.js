@@ -1,6 +1,7 @@
 // components/realm/index.js
 import {FenceGroup} from '../../model/fence-group'
 import {Judger} from '../../model/judger'
+import {Spu} from '../../model/spu'
 
 Component({
     /**
@@ -15,7 +16,8 @@ Component({
      */
     data: {
         fences: [],
-        judger: null
+        judger: null,
+        noSpec: false
     },
 
     observers: {
@@ -23,17 +25,27 @@ Component({
             if(!spu){
                 return
             }
-
+            console.log(spu)
+            //处理无规格商品
+            if(Spu.hasNoSpecs(spu)){
+                this.bindSkuData(spu.sku_list[0])
+                this.setData({
+                    noSpec: true
+                })
+                return
+            }
             const fenceGroup = new FenceGroup(spu, spu.sku_list)
             fenceGroup.initFences()
-            //this.bindInitData(fenceGroup)
-
+            //初始化sku选择框与路径，如果有默认sku则初始化默认sku选择状态
             const judger = new Judger(fenceGroup)
-            //应对默认sku重新载入fences
-            this.setData({
-                judger,
-                fences: fenceGroup.fences
-            })
+            this.bindInitData(judger, fenceGroup)
+            //处理有默认sku显示sku信息，无则显示spu信息
+            const defaultSku = fenceGroup.getDefaultSku()
+            if(defaultSku){
+                this.bindSkuData(defaultSku)
+            }else{
+                this.bindSpuData()
+            }
         }
     },
 
@@ -41,9 +53,30 @@ Component({
      * 组件的方法列表
      */
     methods: {
-        bindInitData(fenceGroup){
+        bindInitData(judger, fenceGroup){
             this.setData({
+                judger,
                 fences: fenceGroup.fences
+            })
+        },
+
+        bindSpuData(){
+            const spu = this.properties.spu
+            this.setData({
+                previewImg: spu.img,
+                title: spu.title,
+                price: spu.price,
+                discount: spu.discount_price
+            })
+        },
+
+        bindSkuData(sku){
+            this.setData({
+                previewImg: sku.img,
+                title: sku.title,
+                price: sku.price,
+                discount: sku.discount_price,
+                stock: sku.stock
             })
         },
 

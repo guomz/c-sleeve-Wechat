@@ -13,9 +13,21 @@
         "miniprogram": {
             "list": [
                 {
-                    "name": "商品详情",
+                    "name": "商品详情包含默认sku",
                     "pathName": "pages/detail/detail",
                     "query": "id=2",
+                    "scene": null
+                },
+                {
+                    "name": "商品详情无默认sku",
+                    "pathName": "pages/detail/detail",
+                    "query": "id=6",
+                    "scene": null
+                },
+                {
+                    "name": "商品详情无规格",
+                    "pathName": "pages/detail/detail",
+                    "query": "id=11",
                     "scene": null
                 }
             ]
