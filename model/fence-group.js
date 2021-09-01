@@ -23,6 +23,14 @@ class FenceGroup{
         this.fences = fences
     }
 
+    getEach(callback){
+        for(let i = 0; i < this.fences.length; i ++){
+            for(let j = 0; j < this.fences[i].cells.length; j ++){
+                callback(this.fences[i].cells[j], i, j)
+            }
+        }
+    }
+
     _createFence(specs){
         const fence = new Fence(specs)
         return fence

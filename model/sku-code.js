@@ -4,10 +4,12 @@ class SkuCode{
     code
     spuId
     segments=[]
+    codeArr=[]
 
     constructor(code){
         this.code = code
         this._splitToSegment()
+        this._initSegmentSet()
     }
 
     _splitToSegment(){
@@ -25,6 +27,12 @@ class SkuCode{
             //收集当前sku的所有组合
             this.segments = this.segments.concat(tempArr)
         }
+    }
+
+    _initSegmentSet(){
+        const spuIdAndCode = this.code.split('$')
+        const codeArr = spuIdAndCode[1].split('#') 
+        this.codeArr = codeArr
     }
 }
 
