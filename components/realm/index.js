@@ -46,6 +46,7 @@ Component({
             }else{
                 this.bindSpuData()
             }
+            this.handleSkuIntact()
         }
     },
 
@@ -80,6 +81,24 @@ Component({
             })
         },
 
+        //处理规格选择提示
+        handleSkuIntact(){
+            const judger = this.data.judger
+            const skuIntact = judger.isSkuIntact()
+            console.log(skuIntact)
+            if(skuIntact){
+                this.setData({
+                    skuIntact,
+                    currentValues: judger.getCurrentValues()
+                })
+            }else{
+                this.setData({
+                    skuIntact,
+                    missingKeys: judger.getMissingKeys()
+                })
+            }
+        },
+
         onCellTap(detail){
             const cellInfo = detail.detail
             const judger = this.data.judger
@@ -87,6 +106,8 @@ Component({
             this.setData({
                 fences: judger.fenceGroup.fences
             })
+            //判断是否选择了完整sku
+            this.handleSkuIntact()
         }
     }
 })

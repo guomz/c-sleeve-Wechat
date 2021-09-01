@@ -5,9 +5,12 @@ import {Joiner} from  '../utils/joiner'
 import {ArrayUtil} from  '../utils/array-util'
 
 class Judger{
+    //规则矩阵
     fenceGroup
     pathDict=[]
+    //存放选中的cell
     skuPending
+    //二维数组，一维为每个可用规格的kv组合
     allSegmentList=[]
 
     constructor(fenceGroup){
@@ -18,7 +21,9 @@ class Judger{
         this._initDefaultSku()
     }
 
+    //初始化默认sku选中状态
     _initDefaultSku(){
+        //检查默认sku是否存在
         const defaultSku = this.fenceGroup.getDefaultSku()
         if(defaultSku){
             //执行若干次judge方法来达到默认sku的选中效果
@@ -40,6 +45,42 @@ class Judger{
             this.pathDict = this.pathDict.concat(skuCode.segments)
             this.allSegmentList.push(skuCode.codeArr)
         })
+    }
+
+    //判断当前是否选中了一组完整的sku
+    isSkuIntact(){
+        for(let fence of this.fenceGroup.fences){
+            const existed = this.skuPending.getCellByKeyId(fence.id)
+            if(!existed){
+                return false
+            }
+        }
+       
+        return true
+    }
+
+    //获取当前选中的sku的规格
+    getCurrentValues(){
+        if(!this.isSkuIntact()){
+            return null
+        }
+        const joiner = new Joiner(',')
+        for(let cell of this.skuPending.pending){
+            joiner.join(cell.spec.value)
+        }
+        return joiner.getStr()
+    }
+
+    //获取没被选中的规格
+    getMissingKeys(){
+        const joiner = new Joiner(',')
+        for(let fence of this.fenceGroup.fences){
+            const existed = this.skuPending.getCellByKeyId(fence.id)
+            if(!existed){
+                joiner.join(fence.value)
+            }
+        }
+        return joiner.getStr()
     }
 
     //有cell被点击时调用

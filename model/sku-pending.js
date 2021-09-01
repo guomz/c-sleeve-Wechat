@@ -24,6 +24,15 @@ class SkuPending{
     //     }
     // }
 
+    getCellByKeyId(keyId){
+        for(let cell of this.pending){
+            if(cell && cell.key_id === keyId){
+                return cell
+            }
+        }
+        return null
+    }
+
     generateCellCodeList(){
         const cellCodeArr=[]
         for(let i = 0; i < this.pending.length; i ++){

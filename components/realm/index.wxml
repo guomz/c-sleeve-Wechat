@@ -1,15 +1,3 @@
-<!--components/realm/index.wxml-->
-<!-- <view class="container">
-    <view class="">
-        <image class="" src=""/>
-    </view>
-    <block wx:for="{{fences}}" wx:key="{{index}}">
-        <g-fence fence="{{item}}" x="{{index}}" bind:celltap="onCellTap"></g-fence>
-    </block>
-    <view class="counter-container">
-        
-    </view>
-</view> -->
 
 <wxs src="/wxs/price.wxs" module="p"></wxs>
 

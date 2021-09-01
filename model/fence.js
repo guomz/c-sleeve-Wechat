@@ -6,11 +6,13 @@ class Fence{
     specs = []
     title
     id
+    value
 
     constructor(specs){
         this.specs = specs
         this.title = specs[0].key
         this.id = specs[0].key_id
+        this.value = specs[0].key
     }
 
     init(){
