@@ -1,2 +1,11 @@
 <!--pages/detail/detail.wxml-->
-<g-realm spu="{{spu}}"></g-realm>
+<l-popup show="{{showRealm}}" content-align="bottom">
+    <g-realm spu="{{spu}}" orderWay="{{orderWay}}"></g-realm>
+</l-popup>
+
+<g-tabbar class="tabbar" bind:gotohome="onGoToHome"
+bind:gotocart="onGoToCart"
+bind:addtocart="onAddToCart"
+bind:buy="onBuy">
+    
+</g-tabbar>

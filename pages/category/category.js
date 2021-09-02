@@ -1,53 +1,18 @@
-// pages/detail/detail.js
-import {Spu} from '../../model/spu'
-import {ShoppingWay} from '../../core/enum'
-
+// pages/category/category.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        spu: null,
-        showRealm: false,
-        orderWay: null
+
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: async function (options) {
-        const spu = await Spu.getSpuDetail(options.id)
-        this.setData({
-            spu
-        })
-    },
+    onLoad: function (options) {
 
-    onGoToHome(){
-        wx.switchTab({
-            url: '/pages/home/home'
-        })
-    },
-
-    onGoToCart(){
-        wx.switchTab({
-            url: '/pages/cart/cart'
-        })
-    },
-
-    onAddToCart(){
-        this.setData({
-            showRealm: true,
-            orderWay: ShoppingWay.CART
-        })
-    },
-
-    onBuy(detail){
-        console.log(detail)
-        this.setData({
-            showRealm: true,
-            orderWay: ShoppingWay.BUY
-        })
     },
 
     /**
