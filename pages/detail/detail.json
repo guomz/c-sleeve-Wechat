@@ -1,6 +1,8 @@
 {
   "usingComponents": {
     "g-realm": "/components/realm/index",
-    "g-tabbar": "/components/tab-bar/index"
+    "g-tabbar": "/components/tab-bar/index",
+    "g-spu-description": "/components/spu-description/index",
+    "g-sale-explain": "/components/sale-explain/index"
   }
 }

@@ -1,6 +1,7 @@
 // pages/detail/detail.js
 import {Spu} from '../../model/spu'
 import {ShoppingWay} from '../../core/enum'
+import {SaleExplain} from '../../model/sale-explain'
 
 Page({
 
@@ -10,7 +11,12 @@ Page({
     data: {
         spu: null,
         showRealm: false,
-        orderWay: null
+        orderWay: null,
+        skuIntact: null,
+        currentValues: null,
+        missingKeys: null,
+        noSpec: false,
+        explain: []
     },
 
     /**
@@ -18,8 +24,21 @@ Page({
      */
     onLoad: async function (options) {
         const spu = await Spu.getSpuDetail(options.id)
+        const explain = await SaleExplain.getSaleExplainText()
+        console.log(explain)
         this.setData({
-            spu
+            spu,
+            explain
+        })
+    },
+
+    //接收规格选择情况
+    onSkuIntact(detail){
+        this.setData({
+            skuIntact: detail.detail.skuIntact,
+            currentValues: detail.detail.currentValues,
+            missingKeys: detail.detail.missingKeys,
+            noSpec: detail.detail.noSpec
         })
     },
 

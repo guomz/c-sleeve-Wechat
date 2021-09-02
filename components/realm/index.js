@@ -42,6 +42,8 @@ Component({
             }
             //检查库存
             this.checkOutStock()
+            //传递规格选择事件
+            this.triggerSkuIntactEvent()
         }
     },
 
@@ -142,6 +144,16 @@ Component({
             }
         },
 
+        //将规格选择提示传递到detail页面
+        triggerSkuIntactEvent(){
+            this.triggerEvent('skuIntact',{
+                skuIntact: this.data.skuIntact,
+                currentValues: this.data.currentValues,
+                missingKeys: this.data.missingKeys,
+                noSpec: this.data.noSpec
+            })
+        },
+
         //点击cell事件监听
         onCellTap(detail){
             const cellInfo = detail.detail
@@ -154,6 +166,8 @@ Component({
             this.handleSkuIntact()
             //判断库存
             this.checkOutStock()
+            //传递规格选择
+            this.triggerSkuIntactEvent()
         }
     }
 })
