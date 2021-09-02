@@ -59,6 +59,17 @@ class Judger{
         return true
     }
 
+    //获取当前选中的sku
+    getCurrentSelectedSku(){
+        const selectedCode = this.skuPending.getCurrentSkuCode()
+        for(let sku of this.fenceGroup.skuList){
+            if(sku.code.split('$')[1] == selectedCode){
+                return sku
+            }
+        }
+        return null
+    }
+
     //获取当前选中的sku的规格
     getCurrentValues(){
         if(!this.isSkuIntact()){

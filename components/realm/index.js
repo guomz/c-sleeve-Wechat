@@ -2,6 +2,7 @@
 import {FenceGroup} from '../../model/fence-group'
 import {Judger} from '../../model/judger'
 import {Spu} from '../../model/spu'
+import {Cart} from '../../model/cart'
 
 Component({
     /**
@@ -17,7 +18,10 @@ Component({
     data: {
         fences: [],
         judger: null,
-        noSpec: false
+        noSpec: false,
+        currentCount: Cart.SKU_MIN_COUNT,
+        stock: 0,
+        outStock: false
     },
 
     observers: {
@@ -28,12 +32,35 @@ Component({
             console.log(spu)
             //处理无规格商品
             if(Spu.hasNoSpecs(spu)){
-                this.bindSkuData(spu.sku_list[0])
-                this.setData({
-                    noSpec: true
-                })
-                return
+                this.handleNoSpecsSpu(spu)
+            }else{
+                //处理含规格商品
+                this.handleNormalSpu(spu)
+                //处理已选或未选的规格
+                this.handleSkuIntact()
             }
+            //检查库存
+            this.checkOutStock()
+        }
+    },
+
+    /**
+     * 组件的方法列表
+     */
+    methods: {
+
+        //处理无规格
+        handleNoSpecsSpu(spu){
+            this.bindSkuData(spu.sku_list[0])
+            this.setData({
+                noSpec: true
+            })
+            return
+        },
+
+        //处理有规格
+        handleNormalSpu(spu){
+            //处理含规格商品
             const fenceGroup = new FenceGroup(spu, spu.sku_list)
             fenceGroup.initFences()
             //初始化sku选择框与路径，如果有默认sku则初始化默认sku选择状态
@@ -46,14 +73,26 @@ Component({
             }else{
                 this.bindSpuData()
             }
-            this.handleSkuIntact()
-        }
-    },
+        },
 
-    /**
-     * 组件的方法列表
-     */
-    methods: {
+        //监听counter组件的数量变化
+        onCounterChange(detail){
+            console.log(detail.detail.count)
+            const count = detail.detail.count
+            this.setData({
+                currentCount: count,
+            })
+            //检查库存
+            this.checkOutStock()
+        },
+
+        //检查是否超库存
+        checkOutStock(){
+            this.setData({
+                outStock: this.data.currentCount > this.data.stock
+            })
+        },
+
         bindInitData(judger, fenceGroup){
             this.setData({
                 judger,
@@ -67,7 +106,8 @@ Component({
                 previewImg: spu.img,
                 title: spu.title,
                 price: spu.price,
-                discount: spu.discount_price
+                discount: spu.discount_price,
+                stock: spu.sku_list[0].stock
             })
         },
 
@@ -85,12 +125,14 @@ Component({
         handleSkuIntact(){
             const judger = this.data.judger
             const skuIntact = judger.isSkuIntact()
-            console.log(skuIntact)
             if(skuIntact){
+                //选中一组sku后展示图片
+                const currentSku = judger.getCurrentSelectedSku()
                 this.setData({
                     skuIntact,
                     currentValues: judger.getCurrentValues()
                 })
+                this.bindSkuData(currentSku)
             }else{
                 this.setData({
                     skuIntact,
@@ -99,6 +141,7 @@ Component({
             }
         },
 
+        //点击cell事件监听
         onCellTap(detail){
             const cellInfo = detail.detail
             const judger = this.data.judger
@@ -108,6 +151,8 @@ Component({
             })
             //判断是否选择了完整sku
             this.handleSkuIntact()
+            //判断库存
+            this.checkOutStock()
         }
     }
 })

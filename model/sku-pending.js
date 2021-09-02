@@ -33,6 +33,13 @@ class SkuPending{
         return null
     }
 
+    //1-42#2-78...
+    getCurrentSkuCode(){
+        const cellCodeArr = this.generateCellCodeList()
+        return cellCodeArr.join('#')
+    }
+
+    //[1-42,2-45,...]
     generateCellCodeList(){
         const cellCodeArr=[]
         for(let i = 0; i < this.pending.length; i ++){
