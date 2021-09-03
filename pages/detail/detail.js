@@ -2,6 +2,7 @@
 import {Spu} from '../../model/spu'
 import {ShoppingWay} from '../../core/enum'
 import {SaleExplain} from '../../model/sale-explain'
+import {getWindowHeightRpx} from '../../utils/system'
 
 Page({
 
@@ -16,7 +17,8 @@ Page({
         currentValues: null,
         missingKeys: null,
         noSpec: false,
-        explain: []
+        explain: [],
+        h: null
     },
 
     /**
@@ -25,10 +27,11 @@ Page({
     onLoad: async function (options) {
         const spu = await Spu.getSpuDetail(options.id)
         const explain = await SaleExplain.getSaleExplainText()
-        console.log(explain)
+        const windowHeightRpx = await getWindowHeightRpx()
         this.setData({
             spu,
-            explain
+            explain,
+            h: windowHeightRpx- 100
         })
     },
 

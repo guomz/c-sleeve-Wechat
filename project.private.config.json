@@ -29,6 +29,12 @@
                     "pathName": "pages/detail/detail",
                     "query": "id=11",
                     "scene": null
+                },
+                {
+                    "name": "分类页面",
+                    "pathName": "pages/category/category",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }
