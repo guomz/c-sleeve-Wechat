@@ -35,6 +35,12 @@
                     "pathName": "pages/category/category",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "搜索页面",
+                    "pathName": "pages/search/search",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }
