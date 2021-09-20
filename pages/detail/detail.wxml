@@ -50,7 +50,7 @@
 </scroll-view>
 
 <l-popup show="{{showRealm}}" content-align="bottom">
-    <g-realm spu="{{spu}}" orderWay="{{orderWay}}" bind:skuIntact="onSkuIntact"></g-realm>
+    <g-realm bind:shopping="onShopping" spu="{{spu}}" orderWay="{{orderWay}}" bind:skuIntact="onSkuIntact"></g-realm>
 </l-popup>
 
 <g-tabbar class="tabbar" bind:gotohome="onGoToHome"

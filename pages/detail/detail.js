@@ -35,6 +35,10 @@ Page({
         })
     },
 
+    //监听购买或购物车事件
+    onShopping(detail){
+    },
+
     //接收规格选择情况
     onSkuIntact(detail){
         this.setData({
@@ -65,7 +69,6 @@ Page({
     },
 
     onBuy(detail){
-        console.log(detail)
         this.setData({
             showRealm: true,
             orderWay: ShoppingWay.BUY

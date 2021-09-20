@@ -168,6 +168,38 @@ Component({
             this.checkOutStock()
             //传递规格选择
             this.triggerSkuIntactEvent()
+        },
+
+        //点击购买或购物车
+        onBuyOrCart(detail){
+            //无规格
+            if(Spu.hasNoSpecs(this.properties.spu)){
+                this._triggerShoppingEvent(this.data.spu.sku_list[0])
+            }else{
+                //有规格
+                const judger = this.data.judger
+                const skuIntact = judger.isSkuIntact()
+                if(!skuIntact){
+                    //未选中一组sku
+                    wx.showToast({
+                        title: `请选择：${judger.getMissingKeys()}`,
+                        icon: 'none',
+                        duration: 3000,
+                    });
+                }else{
+                    this._triggerShoppingEvent(judger.getCurrentSelectedSku())
+                }
+            }
+        },
+
+        //传递购物车或购买事件
+        _triggerShoppingEvent(sku){
+            this.triggerEvent('shopping', {
+                sku: sku,
+                spuId: sku.spu_id,
+                count: this.data.currentCount,
+                orderWay: this.properties.orderWay
+            })
         }
     }
 })
