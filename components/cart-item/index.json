@@ -1,4 +1,8 @@
 {
     "component": true,
-    "usingComponents": {}
+    "usingComponents": {
+        "l-checkbox": "/miniprogram_npm/lin-ui/checkbox/index",
+        "l-checkbox-group": "/miniprogram_npm/lin-ui/checkbox-group/index",
+        "g-counter": "/components/counter/index"
+    }
 }

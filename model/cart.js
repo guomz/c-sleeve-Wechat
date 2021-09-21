@@ -13,6 +13,16 @@ class Cart{
         return this
     }
 
+    //获取购物车全部商品
+    getAllCartItems(){
+        return this._getCartData().items
+    }
+
+    //获取购物车商品数量
+    getAllItemsCount(){
+        return this._getCartData().items.length
+    }
+
     //向购物车添加商品
     addItem(cartItem){
         const currentItem = this.getCartItem(cartItem.skuId)
@@ -20,7 +30,7 @@ class Cart{
             //存在则更新数量
             currentItem.count += cartItem.count
         }else{
-            this.cartData.unshift(cartItem)
+            this.cartData.items.unshift(cartItem)
         }
         this._refreshCartData()
     }
@@ -37,13 +47,21 @@ class Cart{
     //获取购物车中的商品信息
     getCartItem(skuId){
         const cartItems = this._getCartData().items
-        return cartItems.find(item => item.id == skuId) 
+        return cartItems.find(item => item.skuId == skuId) 
     }
 
     //获取购物车商品索引
     getCartItemIndex(skuId){
         const cartItems = this._getCartData().items
-        return cartItems.findIndex(item => item.id == skuId) 
+        return cartItems.findIndex(item => item.skuId == skuId) 
+    }
+
+    isEmpty(){
+        const cartData = this._getCartData()
+        if(cartData.items.length == 0){
+            return true
+        }
+        return false
     }
 
     //获取购物车数据，若没有则读取缓存
@@ -51,7 +69,7 @@ class Cart{
         if(this.cartData){
             return this.cartData
         }else{
-            const cartData = wx.getStorageSync(Cart.CART_ITEMS_KEY);
+            let cartData = wx.getStorageSync(Cart.CART_ITEMS_KEY);
             if(!cartData){
                 cartData = {
                     items: []

@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "l-status-show": "/miniprogram_npm/lin-ui/status-show/index",
+    "g-cart-item": "/components/cart-item/index"
+  }
 }

@@ -41,6 +41,12 @@
                     "pathName": "pages/search/search",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "购物车",
+                    "pathName": "pages/cart/cart",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

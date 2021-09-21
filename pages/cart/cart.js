@@ -1,18 +1,19 @@
-// pages/cart/cart.js
+import {Cart} from '../../model/cart'
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        cartItems: []
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        
     },
 
     /**
@@ -26,7 +27,10 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        const cart = new Cart()
+        this.setData({
+            cartItems: cart.getAllCartItems()
+        })
     },
 
     /**
