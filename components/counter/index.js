@@ -8,15 +8,22 @@ Component({
         count:{
             type: Number,
             value: Cart.SKU_MIN_COUNT
-        }
+        },
+        min:{
+            type: Number,
+            value: Cart.SKU_MIN_COUNT
+        },
+        max:{
+            type: Number,
+            value: Cart.SKU_MAX_COUNT
+        },
     },
 
     /**
      * 组件的初始数据
      */
     data: {
-        min: Cart.SKU_MIN_COUNT,
-        max: Cart.SKU_MAX_COUNT
+        
     },
 
     /**
@@ -31,6 +38,26 @@ Component({
                 bubbles:true,
                 composed:true
             })
+        },
+
+        //数量超出可选范围
+        onOut(detail){
+            // console.log(this.data.max)
+            // if(this.data.max == 0){
+            //     return
+            // }
+            const type = detail.detail.type
+            if(type == 'overflow_max'){
+                wx.showToast({
+                    title: '库存不足',
+                    icon: 'none',
+                    image: '',
+                    duration: 3000,
+                    mask: false,
+                });
+            }else{
+
+            }
         }
     }
 })

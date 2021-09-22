@@ -6,6 +6,7 @@
            min = "{{min}}"
            max = "{{max}}"
            bind:linchange="onChange"
+           bind:linout="onOut"
 >
 
 </l-counter>

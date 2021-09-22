@@ -21,7 +21,7 @@ Component({
         judger: null,
         noSpec: false,
         currentCount: Cart.SKU_MIN_COUNT,
-        stock: 0,
+        stock: Cart.SKU_MAX_COUNT,
         outStock: false
     },
 
