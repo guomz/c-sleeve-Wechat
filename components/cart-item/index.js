@@ -71,6 +71,8 @@ Component({
             const cart = new Cart()
             //更新缓存中的count
             cart.changeItemCount(this.properties.cartItem.skuId, count)
+            //传递给cart页面处理价格
+            this.triggerEvent('countfloat')
         },
 
         //滑动删除按钮监听

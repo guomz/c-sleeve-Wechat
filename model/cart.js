@@ -13,6 +13,18 @@ class Cart{
         return this
     }
 
+    //获取全部被选中的商品
+    getAllCheckedItems(){
+        const cartItems = this.getAllCartItems()
+        const checkedItems = []
+        cartItems.forEach(item => {
+            if(item.checked){
+                checkedItems.push(item)
+            }
+        })
+        return checkedItems
+    }
+
     //获取购物车全部商品
     getAllCartItems(){
         return this._getCartData().items

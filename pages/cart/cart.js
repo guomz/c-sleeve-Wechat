@@ -1,4 +1,5 @@
 import {Cart} from '../../model/cart'
+import {Calculator} from '../../model/calculator'
 
 Page({
 
@@ -7,7 +8,9 @@ Page({
      */
     data: {
         cartItems: [],
-        allChecked: true
+        allChecked: true,
+        totalPrice: 0,
+        totalSkuCount: 0
     },
 
     /**
@@ -32,6 +35,8 @@ Page({
         this.setData({
             cartItems: cart.getAllCartItems()
         })
+        //刷新价格
+        this.refreshCountAndPrice()
     },
 
     //处理购物车中某个商品被选中/反选事件
@@ -41,6 +46,7 @@ Page({
         const checked = detail.detail.checked
         cart.changeChecked(skuId, checked)
         this.refreshAllCheckedStatus()
+        this.refreshCountAndPrice()
     },
 
     //全选复选框事件
@@ -50,6 +56,8 @@ Page({
         cart.changeAllChecked(allChecked)
         //刷新状态
         this.refreshAllCheckedStatus()
+        //刷新价格
+        this.refreshCountAndPrice()
     },
 
     //刷新购物车物品与全选按钮状态
@@ -62,9 +70,27 @@ Page({
         })
     },
 
+    //刷新总数量与价格
+    refreshCountAndPrice(){
+        const cart = new Cart()
+        const calculator = new Calculator(cart.getAllCheckedItems())
+        const totalCount = calculator.getTotalCount()
+        const totalPrice = calculator.getTotalPrice()
+        this.setData({
+            totalPrice,
+            totalSkuCount: totalCount
+        })
+    },
+
     //监听cart-item删除事件
     onDeleteItem(detail){
         this.refreshAllCheckedStatus()
+        this.refreshCountAndPrice()
+    },
+
+    //调整counter事件监听
+    onCountFloat(detail){
+        this.refreshCountAndPrice()
     },
 
     /**
