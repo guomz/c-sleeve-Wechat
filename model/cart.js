@@ -18,9 +18,16 @@ class Cart{
         return this._getCartData().items
     }
 
-    //获取购物车商品数量
+    //获取购物车商品种类数量
     getAllItemsCount(){
         return this._getCartData().items.length
+    }
+
+    //修改指定购物车商品的购买数量
+    changeItemCount(skuId, count){
+        const cartItem = this.getCartItem(skuId)
+        cartItem.count = count
+        this._refreshCartData()
     }
 
     //更改某个商品的选中状态

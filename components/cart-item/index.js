@@ -69,13 +69,8 @@ Component({
         onCounterChange(detail){
             const count = detail.detail.count
             const cart = new Cart()
-            this.properties.cartItem.count = count
-            this.setData({
-                count
-            })
             //更新缓存中的count
-            const currentItem = cart.getCartItem(this.properties.cartItem.skuId)
-            currentItem.count = count
+            cart.changeItemCount(this.properties.cartItem.skuId, count)
         },
 
         //滑动删除按钮监听
