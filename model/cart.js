@@ -38,7 +38,7 @@ class Cart{
     //删除购物车商品
     removeItem(skuId){
         const itemIndex = this.getCartItemIndex(skuId)
-        if(itemIndex){
+        if(itemIndex !== null){
             this.cartData.items.splice(itemIndex,1)
         }
         this._refreshCartData()

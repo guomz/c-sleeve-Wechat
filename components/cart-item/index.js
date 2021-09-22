@@ -1,5 +1,6 @@
 // components/cart-item/index.js
 import {CartItem} from '../../model/cart-item'
+import {Cart} from '../../model/cart'
 Component({
     /**
      * 组件的属性列表
@@ -18,7 +19,9 @@ Component({
         discount: false,
         specStr: '',
         price: null,
-        discountPrice: null
+        discountPrice: null,
+        stock: Cart.SKU_MAX_COUNT,
+        count: Cart.SKU_MIN_COUNT
     },
 
     observers:{
@@ -32,13 +35,17 @@ Component({
             const discount = cartItem.sku.discount_price? true: false
             const price = cartItem.sku.price
             const discountPrice = cartItem.sku.discount_price
+            const count = cartItem.count
+            const stock = cartItem.sku.stock
             this.setData({
                 checked: cartItem.checked,
                 online,
                 soldOut,
                 discount,
                 price,
-                discountPrice
+                discountPrice,
+                count,
+                stock
             })
         }
     },
@@ -58,6 +65,21 @@ Component({
         //数量选择器点击事件
         onCounterChange(detail){
 
+        },
+
+        //滑动删除按钮监听
+        onDelete(detail){
+            //从购物车删除
+            const skuId = this.properties.cartItem.skuId
+            const cart = new Cart()
+            cart.removeItem(skuId)
+            this.setData({
+                cartItem: null
+            })
+            //传递事件
+            this.triggerEvent('itemDelete',{
+                skuId
+            })
         }
     }
 })
