@@ -2,7 +2,31 @@
 <l-status-show show = "{{cartItems.length == 0}}" type='cart'></l-status-show>
 <view wx:if="{{cartItems.length != 0}}" class="container">
     <block wx:key="index" wx:for="{{cartItems}}">
-        <g-cart-item bind:overflow="onOverflow" bind:itemdelete="onDeleteItem" bind:countfloat="onCountFloat" bind:itemcheck="onSingleCheck" cart-item="{{item}}">
+        <g-cart-item bind:overflow="onOverflow" bind:itemDelete="onDeleteItem" bind:countfloat="onCountFloat" bind:selectSingle="onSingleCheck" cart-item="{{item}}">
         </g-cart-item>
     </block>
 </view>
+
+<view wx:if="{{cartItems.length != 0}}" class="total-container">
+    <view class="data-container">
+        <view class="checkbox-container">
+            <l-checkbox-group bind:linchange="onSelectAll">
+                <l-checkbox placement="left" key="{{cartItem.skuId}}" checked="{{allChecked}}"></l-checkbox>
+            </l-checkbox-group>
+            <text>全选</text>
+        </view>
+        <view class="price-container">
+            <text>合计</text>
+            <l-price value="{{totalPrice}}"
+                     color="#157658"
+                     count-size="32"
+                     unit-size="32">
+            </l-price>
+        </view>
+    </view>
+    <view bind:tap="onSettle" class="settlement-btn {{totalSkuCount===0?'disabled':''}}">
+        <text>结算 ( {{totalSkuCount}} )</text>
+    </view>
+</view>
+
+<view style="height: 100rpx"></view>

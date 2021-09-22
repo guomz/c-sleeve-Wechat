@@ -23,6 +23,33 @@ class Cart{
         return this._getCartData().items.length
     }
 
+    //更改某个商品的选中状态
+    changeChecked(skuId, checked){
+        const cartItem = this.getCartItem(skuId)
+        cartItem.checked = checked
+        this._refreshCartData()
+    }
+
+    //判断购物车商品是否都被选中
+    isAllChecked(){
+        const cartItems = this.getAllCartItems()
+        for(let i in cartItems){
+            if(!cartItems[i].checked){
+                return false
+            }
+        }
+        return true
+    }
+
+    //更改全部物品选中状态
+    changeAllChecked(checked){
+        const cartItems = this.getAllCartItems()
+        for(let i in cartItems){
+            cartItems[i].checked = checked
+        }
+        this._refreshCartData()
+    }
+
     //向购物车添加商品
     addItem(cartItem){
         const currentItem = this.getCartItem(cartItem.skuId)

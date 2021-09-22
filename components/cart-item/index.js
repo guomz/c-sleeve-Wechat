@@ -1,5 +1,4 @@
 // components/cart-item/index.js
-import {CartItem} from '../../model/cart-item'
 import {Cart} from '../../model/cart'
 Component({
     /**
@@ -56,9 +55,13 @@ Component({
     methods: {
         //点击选择框触发事件
         onSelect(detail){
-            console.log(detail.detail)
             this.setData({
                 checked: detail.detail.checked
+            })
+            //传递给cart页面处理全选逻辑
+            this.triggerEvent('selectSingle',{
+                skuId: this.properties.cartItem.skuId,
+                checked:detail.detail.checked
             })
         },
 
@@ -79,7 +82,7 @@ Component({
             //传递事件
             this.triggerEvent('itemDelete',{
                 skuId
-            })
+            },{ bubbles: true })
         }
     }
 })

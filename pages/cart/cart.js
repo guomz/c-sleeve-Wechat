@@ -6,7 +6,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        cartItems: []
+        cartItems: [],
+        allChecked: true
     },
 
     /**
@@ -31,6 +32,40 @@ Page({
         this.setData({
             cartItems: cart.getAllCartItems()
         })
+    },
+
+    //处理购物车中某个商品被选中/反选事件
+    onSingleCheck(detail){
+        const cart = new Cart()
+        const skuId = detail.detail.skuId
+        const checked = detail.detail.checked
+        cart.changeChecked(skuId, checked)
+        this.refreshAllCheckedStatus()
+    },
+
+    //全选复选框事件
+    onSelectAll(detail){
+        const cart = new Cart()
+        const allChecked = detail.detail.checked
+        cart.changeAllChecked(allChecked)
+        //刷新状态
+        this.refreshAllCheckedStatus()
+    },
+
+    //刷新购物车物品与全选按钮状态
+    refreshAllCheckedStatus(){
+        const cart = new Cart()
+        const allChecked = cart.isAllChecked()
+        this.setData({
+            allChecked: allChecked,
+            cartItems: cart.getAllCartItems()
+        })
+    },
+
+    //监听cart-item删除事件
+    onDeleteItem(detail){
+        console.log(detail)
+        this.refreshAllCheckedStatus()
     },
 
     /**
