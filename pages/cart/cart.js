@@ -29,7 +29,6 @@ Page({
      */
     onShow: function () {
         const cart = new Cart()
-        console.log(cart)
         this.setData({
             cartItems: cart.getAllCartItems()
         })
