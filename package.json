@@ -1,7 +1,6 @@
 {
   "name": "miniprogram-1",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,5 +9,15 @@
   "license": "ISC",
   "dependencies": {
     "lin-ui": "^0.9.4"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guomz/c-sleeve-Wechat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guomz/c-sleeve-Wechat/issues"
+  },
+  "homepage": "https://github.com/guomz/c-sleeve-Wechat#readme",
+  "description": ""
 }

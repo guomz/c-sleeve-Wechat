@@ -14,7 +14,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        
+         
     },
 
     /**
@@ -29,6 +29,7 @@ Page({
      */
     onShow: function () {
         const cart = new Cart()
+        console.log(cart)
         this.setData({
             cartItems: cart.getAllCartItems()
         })
@@ -64,7 +65,6 @@ Page({
 
     //监听cart-item删除事件
     onDeleteItem(detail){
-        console.log(detail)
         this.refreshAllCheckedStatus()
     },
 
