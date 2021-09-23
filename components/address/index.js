@@ -35,11 +35,13 @@ Component({
         //选择地址
         async onChooseAddress(){
             const res = await wx.chooseAddress({});
-            this.setData({
-                address: res,
-                hasChosen: true
-            })
-            Address.setAddress(res)
+            if(res){
+                this.setData({
+                    address: res,
+                    hasChosen: true
+                })
+                Address.setAddress(res)
+            }
         },
     }
 })

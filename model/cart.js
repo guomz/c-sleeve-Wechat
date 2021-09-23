@@ -24,6 +24,7 @@ class Cart{
         //获取服务器数据
         const ids = cartItems.map(item => item.skuId)
         const skus = await Sku.getSkuByIds(ids)
+        console.log(skus)
         //更新每个
         cartItems.forEach(cartItem => {
             this._refreshEach(cartItem, skus)
@@ -53,7 +54,7 @@ class Cart{
         const cartItems = this.getAllCartItems()
         const checkedItems = []
         cartItems.forEach(item => {
-            if(item.checked){
+            if(item && item.checked){
                 checkedItems.push(item)
             }
         })

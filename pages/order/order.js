@@ -1,32 +1,46 @@
-// pages/order/order.js
+import {Cart} from '../../model/cart'
+import { OrderItem } from '../../model/order-item'
+import { Order } from '../../model/order'
+
+const cart = new Cart()
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        orderItems:[]
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-
+    async onLoad(options) {
+        //请求服务器更新数据，得到被选中的
+        await cart.refreshCartSkuWithServer()
+        const checkedItems = cart.getAllCheckedItems()
+        const orderItems = this.generateOrderItems(checkedItems)
+        const order = new Order(orderItems)
+        this.setData({
+            orderItems
+        })
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+    //生成订单商品
+    generateOrderItems(checkedItems){
+        const orderItems = []
+        checkedItems.forEach(item => {
+            let orderItem = new OrderItem(item)
+            orderItems.push(orderItem)
+        })
+        return orderItems
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        
     },
 
     /**
