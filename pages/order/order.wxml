@@ -1,0 +1,4 @@
+<!--pages/order/order.wxml-->
+<view class="container">
+    <g-address></g-address>
+</view>

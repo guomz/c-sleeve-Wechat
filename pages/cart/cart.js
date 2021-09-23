@@ -88,6 +88,13 @@ Page({
         this.refreshCountAndPrice()
     },
 
+    //点击结算跳转到订单预览
+    onSettle(){
+        wx.navigateTo({
+            url: '/pages/order/order',
+        });
+    },
+
     /**
      * 生命周期函数--监听页面隐藏
      */
