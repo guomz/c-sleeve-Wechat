@@ -9,6 +9,14 @@ class Activity{
             method: 'GET'
         })
     }
+
+    static async getActivityWithCouponByName(themeName){
+        return await Http.request({
+            url: `/activity/name/${themeName}/with_coupon`,
+            data: null,
+            method: 'GET'
+        }) 
+    }
 }
 
 export {

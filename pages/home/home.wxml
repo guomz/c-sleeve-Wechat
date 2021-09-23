@@ -9,7 +9,7 @@
         </block>
     </swiper>
     <g-category-grid grid="{{categoryGrid}}"></g-category-grid>
-    <image class="activity" src="{{activityD.entrance_img}}" />
+    <image class="activity" src="{{activityD.entrance_img}}" bind:tap="goCoupon" data-atheme="a-2"/>
     <g-spu-scroll spuList="{{themeESpuList}}" theme="{{topThemeE}}"></g-spu-scroll>
     <image src="{{topThemeF.entrance_img}}" class="quality" />
     <g-hot-list banner="{{bannerG}}"></g-hot-list>

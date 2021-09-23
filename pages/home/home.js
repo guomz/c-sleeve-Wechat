@@ -4,6 +4,7 @@ import {Banner} from '../../model/banner'
 import {Category} from '../../model/category'
 import {Activity} from '../../model/activity'
 import {SpuPaging} from '../../model/spu-paging'
+import {CouponCenterType} from '../../core/enum'
 
 Page({
 
@@ -73,6 +74,14 @@ Page({
         this.setData({
             paging: latestPaging
         })
+    },
+
+    goCoupon(detail){
+        console.log(detail)
+        const themeName = detail.currentTarget.dataset.atheme
+        wx.navigateTo({
+            url: `/pages/coupon/coupon?theme=${themeName}&type=${CouponCenterType.ACTIVITY}`,
+        });
     },
 
     /**

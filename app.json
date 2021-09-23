@@ -9,7 +9,8 @@
         "pages/category/category",
         "pages/spu-list/spu-list",
         "pages/search/search",
-        "pages/order/order"
+        "pages/order/order",
+        "pages/coupon/coupon"
     ],
     "window": {
         "backgroundTextStyle": "light",
