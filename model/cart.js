@@ -1,3 +1,5 @@
+import {Sku} from '../model/sku'
+
 class Cart{
     static SKU_MIN_COUNT=1
     static SKU_MAX_COUNT=999
@@ -11,6 +13,39 @@ class Cart{
         }
         Cart.instance = this
         return this
+    }
+
+    //与服务器同步购物车数据
+    async refreshCartSkuWithServer(){
+        const cartItems = this.getAllCartItems()
+        if(cartItems.length == 0){
+            return
+        }
+        //获取服务器数据
+        const ids = cartItems.map(item => item.skuId)
+        const skus = await Sku.getSkuByIds(ids)
+        //更新每个
+        cartItems.forEach(cartItem => {
+            this._refreshEach(cartItem, skus)
+        })
+
+        this._refreshCartData()
+    }
+
+    //同步每个购物车数据
+    _refreshEach(cartItem, skus){
+        let exist = false
+        for(let sku of skus){
+            if(sku.id == cartItem.skuId){
+                cartItem.sku = sku
+                exist = true
+                break
+            }
+        }
+        //商品不存在，即下架
+        if(!exist){
+            cartItem.sku.online = false
+        }
     }
 
     //获取全部被选中的商品
