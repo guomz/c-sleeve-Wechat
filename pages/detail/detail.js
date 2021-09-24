@@ -5,6 +5,8 @@ import {SaleExplain} from '../../model/sale-explain'
 import {getWindowHeightRpx} from '../../utils/system'
 import {Cart} from '../../model/cart'
 import {CartItem} from '../../model/cart-item'
+import {Coupon} from '../../model/coupon'
+import {CouponCenterType} from '../../core/enum'
 
 Page({
 
@@ -21,7 +23,8 @@ Page({
         noSpec: false,
         explain: [],
         h: null,
-        cartItemsCount: 0
+        cartItemsCount: 0,
+        coupons: []
     },
 
     /**
@@ -31,11 +34,20 @@ Page({
         const spu = await Spu.getSpuDetail(options.id)
         const explain = await SaleExplain.getSaleExplainText()
         const windowHeightRpx = await getWindowHeightRpx()
+        const coupons = await Coupon.getTop2CouponsByCategory(spu.category_id)
         this.setData({
             spu,
             explain,
-            h: windowHeightRpx- 100
+            h: windowHeightRpx- 100,
+            coupons
         })
+    },
+
+    //前往优惠券页面
+    onGoToCouponCenter(){
+        wx.navigateTo({
+            url: `/pages/coupon/coupon?cid=${this.data.spu.category_id}&type=${CouponCenterType.SPU_CATEGORY}`,
+        });
     },
 
     //监听realm组件的购买或购物车事件

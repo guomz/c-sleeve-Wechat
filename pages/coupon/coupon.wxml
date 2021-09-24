@@ -1,2 +1,6 @@
 <!--pages/coupon/coupon.wxml-->
-<text>pages/coupon/coupon.wxml</text>
+<view class="container">
+    <block wx:for="{{coupons}}">
+        <g-coupon coupon="{{item}}" status="0"></g-coupon>
+    </block>
+</view>

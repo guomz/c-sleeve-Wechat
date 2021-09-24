@@ -1,0 +1,5 @@
+<!--components/coupon-mini/index.wxml-->
+<view class="container">
+    <text class="text">{{text}}</text>
+    <image class="bg" src="../imgs/coupon@mini.png"></image>
+</view>

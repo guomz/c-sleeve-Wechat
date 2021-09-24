@@ -47,6 +47,12 @@
                     "pathName": "pages/cart/cart",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "优惠券页面",
+                    "pathName": "pages/coupon/coupon",
+                    "query": "theme=a-2&type=activity",
+                    "scene": null
                 }
             ]
         }

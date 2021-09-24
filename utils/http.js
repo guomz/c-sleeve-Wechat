@@ -40,7 +40,7 @@ class Http{
                 Http.showError(res.data)
             }
         }
-       // return res.data
+       return res.data
     }
 
     //重发请求

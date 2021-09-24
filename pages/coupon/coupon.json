@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "g-coupon": "/components/coupon/index"
+  }
 }

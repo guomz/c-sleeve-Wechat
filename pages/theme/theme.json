@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "l-water-flow": "/miniprogram_npm/lin-ui/water-flow",
+    "g-spu-preview": "/components/spu-preview/index"
+  }
+}
