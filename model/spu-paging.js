@@ -8,6 +8,19 @@ class SpuPaging{
             count:3
         })
     }
+
+    static getCategorySpuPaging(id, isRoot){
+        return new Paging({
+            req: {
+                url: `/spu/by/category/${id}`,
+                data: {
+                    is_root: isRoot
+                }
+            },
+            start: 0,
+            count: 3
+        })
+    }
 }
 
 export{

@@ -76,11 +76,21 @@ Page({
         })
     },
 
+    //点击优惠券
     goCoupon(detail){
-        console.log(detail)
+        console.log(detail.detail)
         const themeName = detail.currentTarget.dataset.atheme
         wx.navigateTo({
             url: `/pages/coupon/coupon?theme=${themeName}&type=${CouponCenterType.ACTIVITY}`,
+        });
+    },
+
+    //监听九宫格点击事件
+    gridTap(detail){
+        const cid = detail.detail.cid
+        const type = detail.detail.type
+        wx.navigateTo({
+            url: `/pages/spu-list/spu-list?cid=${cid}&type=${type}`,
         });
     },
 

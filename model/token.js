@@ -26,13 +26,13 @@ class Token{
             token = await this.getToken()
             wx.setStorageSync('token', token);
         }else{
-            await this.verifyFromServer()
+            await this.verifyFromServer(token)
         }
     }
 
     async verifyFromServer(token){
         const res = await promisic(wx.request)({
-            url: this.getTokenUrl,
+            url: this.verifyTokenUrl,
             method: 'POST',
             data: {
                 token

@@ -1,2 +1,7 @@
 <!--pages/spu-list/spu-list.wxml-->
-<text>pages/spu-list/spu-list.wxml</text>
+<l-status-show show = "{{paging.currentData.length == 0}}" type='product'></l-status-show>
+<view slot="content" class="spu-bottom">
+        <l-water-flow bind:item="onItemTap" generic:l-water-flow-item="g-spu-preview"></l-water-flow>
+</view>
+<l-loadmore show="{{true}}" type="{{loadMoreType}}" loading-text="努力加载中..." end-text="—— 7七月作品 ——">
+</l-loadmore>

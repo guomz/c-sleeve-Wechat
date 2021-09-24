@@ -1,4 +1,5 @@
 import {Token} from './model/token'
+import {codes} from './config/exception-config'
 App({
   async onLaunch() {
     // // 展示本地存储能力
@@ -14,7 +15,6 @@ App({
     // })
     const token = new Token()
     await token.verifyToken()
-
   },
   globalData: {
     userInfo: null
