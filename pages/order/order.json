@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "g-address": "/components/address/index"
+    "g-address": "/components/address/index",
+    "g-coupon-picker": "/components/coupon-picker/index"
   }
 }

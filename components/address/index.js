@@ -24,6 +24,9 @@ Component({
                 hasChosen: address? true:false,
                 address
             })
+            this.triggerEvent('chooseaddress',{
+                address
+            })
         }
     },
 
@@ -42,6 +45,9 @@ Component({
                 })
                 Address.setAddress(res)
             }
+            this.triggerEvent('chooseaddress',{
+                address: res
+            })
         },
     }
 })

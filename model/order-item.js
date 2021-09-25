@@ -1,21 +1,24 @@
 import {OrderException} from '../core/order-exception'
 import {OrderExceptionType} from '../core/enum'
 import {Joiner} from '../utils/joiner'
+import  {accMultiply} from '../utils/number'
 
 class OrderItem{
 
-    finalPrice
+    singleFinalPrice
     count=0
     sku
     skuId
     specValuesText=null
+    singleFinalTotalPrice
 
     constructor(checkedItem){
         this.sku = checkedItem.sku
         this.count = checkedItem.count
         this.skuId = checkedItem.skuId
-        this.finalPrice = checkedItem.sku.discount_price? checkedItem.sku.discount_price:checkedItem.sku.price
+        this.singleFinalPrice = checkedItem.sku.discount_price? checkedItem.sku.discount_price:checkedItem.sku.price
         this.specValuesText = this._generateSpecValuesText(checkedItem.sku)
+        this.singleFinalTotalPrice = accMultiply(this.singleFinalPrice, this.count)
     }
 
     //判断库存
