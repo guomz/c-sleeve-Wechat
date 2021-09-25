@@ -66,7 +66,9 @@ Page({
                 cartItemsCount: cart.getAllItemsCount()
             })
         }else{
-
+            wx.navigateTo({
+                url: `/pages/order/order?skuId=${sku.id}&count=${count}&type=${ShoppingWay.BUY}`
+            })
         }
     },
 

@@ -1,5 +1,6 @@
 import {Cart} from '../../model/cart'
 import {Calculator} from '../../model/calculator'
+import { ShoppingWay } from '../../core/enum'
 
 Page({
 
@@ -91,7 +92,7 @@ Page({
     //点击结算跳转到订单预览
     onSettle(){
         wx.navigateTo({
-            url: '/pages/order/order',
+            url: `/pages/order/order?type=${ShoppingWay.CART}`,
         });
     },
 

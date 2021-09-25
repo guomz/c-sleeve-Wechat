@@ -3,6 +3,10 @@ import { OrderItem } from '../../model/order-item'
 import { Order } from '../../model/order'
 import {Coupon} from '../../model/coupon'
 import {CouponBo} from '../../model/coupon-bo'
+import { OrderPost } from '../../model/order-post'
+import { ShoppingWay } from '../../core/enum'
+import { Sku } from '../../model/sku'
+import { CartItem } from '../../model/cart-item'
 
 const cart = new Cart()
 Page({
@@ -12,22 +16,51 @@ Page({
      */
     data: {
         address: null,
+        order: null,
+        currentCoupon: null,
         orderItems:[],
         couponBos: [],
         totalPrice: 0,
         discountMoney: 0,
-        finalTotalPrice: 0
+        finalTotalPrice: 0,
+        isOk: true,
+        orderFail: false,
+        orderFailMsg: '生成订单失败',
+        submitBtnDisable: false
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     async onLoad(options) {
-        //请求服务器更新数据，得到被选中的
-        await cart.refreshCartSkuWithServer()
-        const checkedItems = cart.getAllCheckedItems()
-        const orderItems = this.generateOrderItems(checkedItems)
+        const type= options.type
+        let orderItems = []
+        if(type == ShoppingWay.BUY){
+            //立即购买
+            const skuId = options.skuId
+            const count = options.count
+            //查询服务器获取sku
+            const skus = await Sku.getSkuByIds(skuId)
+            const sku = skus[0]
+            const orderItem = new OrderItem(new CartItem(sku, count))
+            orderItems.push(orderItem)
+        }else{
+            //购物车
+            //请求服务器更新数据
+            await cart.refreshCartSkuWithServer()
+            const checkedItems = cart.getAllCheckedItems()
+            orderItems = this.generateOrderItems(checkedItems)
+        }
+        
         const order = new Order(orderItems)
+        try{
+            //进行订单物品库存判断
+            order.checkOrderIsOk()
+        }catch(e){
+            this.setData({
+                isOk: false
+            })
+        }
         const coupons = await Coupon.getMyCouponsWithCategory()
         const couponBos = coupons.map(coupon => {
             let couponBo = new CouponBo(coupon)
@@ -36,6 +69,7 @@ Page({
             return couponBo
         })
         this.setData({
+            order,
             orderItems,
             couponBos,
             totalPrice: order.totalPrice,
@@ -55,7 +89,6 @@ Page({
 
     //监听优惠券的选择
     onChooseCoupon(detail){
-        console.log(detail.detail)
         const couponId = detail.detail.couponId
         const checked = detail.detail.checked
         if(!checked){
@@ -71,7 +104,12 @@ Page({
                 return
             }
             //计算优惠后金额
-
+            const priceResult = CouponBo.getFinalPrice(this.data.order, currentCoupon)
+            this.setData({
+                finalTotalPrice: priceResult.finalPrice,
+                discountMoney: priceResult.discountMoney,
+                currentCoupon
+            })
         }
     },
 
@@ -83,7 +121,7 @@ Page({
     },
 
     //提交订单
-    onSubmit(detail){
+    async onSubmit(detail){
         const address = this.data.address
         if(!address){
             wx.showToast({
@@ -96,7 +134,42 @@ Page({
             return
         }
 
-        
+        const skuInfoList = this.data.orderItems.map(orderItem => {
+            return {
+                id: orderItem.skuId,
+                count: orderItem.count
+            }
+        })
+        const order = this.data.order
+        const currentCoupon = this.data.currentCoupon
+        const orderPost = new OrderPost(order.totalPrice, this.data.finalTotalPrice, 
+            currentCoupon? currentCoupon.id: null, skuInfoList, this.data.address)
+        //执行下单请求
+        try{
+            const placeResult = await Order.placeOrder(orderPost)
+            console.log(placeResult)
+            //下单后禁用提交订单按钮
+            this.setData({
+                submitBtnDisable: true
+            })
+            //跳转到成功页面
+            wx.redirectTo({
+                url: '/pages/pay-success/pay-success',
+            });
+        }catch(e){
+            //生成订单失败报错
+            console.log(e)
+            this.setData({
+                orderFail: true,
+                orderFailMsg: e.message,
+                submitBtnDisable: true
+            })
+            //跳转到我的订单
+            wx.redirectTo({
+                url:"/pages/my-order/my-order"
+            })
+        }
+
     },
 
     /**

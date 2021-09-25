@@ -1,3 +1,4 @@
+import { Http } from '../utils/http'
 import  {accMultiply} from '../utils/number'
 import {accAdd} from '../utils/number'
 
@@ -5,7 +6,6 @@ class Order{
 
     orderItems=[]
     totalPrice
-    finalTotalPrice
 
     constructor(orderItems){
         this.orderItems = orderItems
@@ -33,6 +33,17 @@ class Order{
         return orderItemsInIds.reduce((acc, cur)=> {
             return accAdd(acc, cur.singleFinalTotalPrice)
         },0)
+    }
+
+    //下订单
+    static async placeOrder(orderPost){
+        return await Http.request({
+            url: `/order`,
+            data:orderPost,
+            method: 'POST',
+            refetch: true,
+            throwError: true
+        })
     }
 }
 

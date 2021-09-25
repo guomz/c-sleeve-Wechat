@@ -12,7 +12,9 @@
         "pages/order/order",
         "pages/coupon/coupon",
         "pages/theme/theme",
-        "pages/theme-spu-list/theme-spu-list"
+        "pages/theme-spu-list/theme-spu-list",
+        "pages/pay-success/pay-success",
+        "pages/my-order/my-order"
     ],
     "window": {
         "backgroundTextStyle": "light",

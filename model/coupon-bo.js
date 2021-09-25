@@ -1,4 +1,5 @@
 import {CouponType} from '../core/enum'
+import { accMultiply,accSubtract } from '../utils/number'
 
 class CouponBo{
     constructor(coupon) {
@@ -65,30 +66,32 @@ class CouponBo{
         switch (couponObj.type) {
             case CouponType.FULL_MINUS:
                 return {
-                    finalPrice: accSubtract(order.getTotalPrice(), couponObj.minus),
+                    finalPrice: accSubtract(order.totalPrice, couponObj.minus),
                     discountMoney: couponObj.minus
                 }
             case CouponType.FULL_OFF:
-                let categoryTotalPrice;
-                if (couponObj.wholeStore) {
-                    // 全场券无视适用分类
-                    categoryTotalPrice = order.getTotalPrice()
-                } else {
-                    const categoryIds = couponObj.categories.map(category => {
-                        return category.id
-                    })
-                    categoryTotalPrice = order.getTotalPriceByCategoryIdList(categoryIds)
-                }
-                const discountRate = accSubtract(1, couponObj.rate)
-                const discountMoney = accMultiply(categoryTotalPrice, discountRate)
-                const actualPrice = accSubtract(order.getTotalPrice(), discountMoney)
-                finalPrice = CouponBO.roundMoney(actualPrice)
+                // let categoryTotalPrice;
+                // if (couponObj.wholeStore) {
+                //     // 全场券无视适用分类
+                //     categoryTotalPrice = order.totalPrice
+                // } else {
+                //     const categoryIds = couponObj.categories.map(category => {
+                //         return category.id
+                //     })
+                //     categoryTotalPrice = order.getTotalPriceByCategoryIdList(categoryIds)
+                // }
+                // const discountRate = accSubtract(1, couponObj.rate)
+                // const discountMoney = accMultiply(categoryTotalPrice, discountRate)
+                // const actualPrice = accSubtract(order.totalPrice, discountMoney)
+                // finalPrice = CouponBO.roundMoney(actualPrice)
+                let actualPrice = accMultiply(order.totalPrice, couponObj.rate)
+                finalPrice = CouponBo.roundMoney(actualPrice)
                 return {
                     finalPrice,
-                    discountMoney
+                    discountMoney: accSubtract(order.totalPrice, finalPrice)
                 }
             case CouponType.NO_THRESHOLD_MINUS:
-                finalPrice = accSubtract(orderPrice, couponObj.minus)
+                finalPrice = accSubtract(order.totalPrice, couponObj.minus)
                 finalPrice = finalPrice < 0 ? 0 : finalPrice
                 return {
                     finalPrice,

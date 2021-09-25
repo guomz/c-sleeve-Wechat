@@ -2,9 +2,10 @@ import {config} from '../config/config'
 import {promisic} from '../miniprogram_npm/lin-ui/utils/util'
 import {Token} from '../model/token'
 import { codes } from '../config/exception-config'
+import {HttpException} from '../core/http-exception'
 
 class Http{
-    static async request({url, data, method = 'GET',refetch = true}){
+    static async request({url, data, method = 'GET',refetch = true,throwError = false}){
         let res
         try{
              res = await promisic(wx.request)({
@@ -17,7 +18,11 @@ class Http{
                 }
             })
         }catch(e){
-
+            if (throwError) {
+                throw new HttpException(-1, codes[-1])
+            }
+            Http.showError(-1)
+            return null
         }
         //判断http状态码
         const code = res.statusCode.toString()
@@ -34,11 +39,21 @@ class Http{
                         method
                     })
                 }
-            }else if (code == '404') {
-                return res.data
-            }else{
+            }else {
+                //无权限或者500问题
+                //异常需要自订处理
+                if (throwError) {
+                    throw new HttpException(res.data.code, res.data.message, code)
+                }
+                if (code == '404') {
+                    return res.data
+                }
+
                 Http.showError(res.data)
+                
             }
+            
+            
         }
        return res.data
     }
