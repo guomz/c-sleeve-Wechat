@@ -38,7 +38,8 @@ class Paging{
         return {
             items: data.items,
             currentData: this.currentData,
-            moreData: this.moreData
+            moreData: this.moreData,
+            total: data.total
         }
     }
 

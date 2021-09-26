@@ -15,7 +15,9 @@
         "pages/theme-spu-list/theme-spu-list",
         "pages/pay-success/pay-success",
         "pages/my-order/my-order",
-        "pages/about/about"
+        "pages/about/about",
+        "pages/order-detail/order-detail",
+        "pages/submit-success/submit-success"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -81,6 +83,8 @@
         "l-checkbox-group": "/miniprogram_npm/lin-ui/checkbox-group/index",
         "l-checkbox": "/miniprogram_npm/lin-ui/checkbox/index",
         "l-status-show": "/miniprogram_npm/lin-ui/status-show/index",
-        "l-avatar": "/miniprogram_npm/lin-ui/avatar/index"
+        "l-avatar": "/miniprogram_npm/lin-ui/avatar/index",
+        "l-list": "/miniprogram_npm/lin-ui/list/index",
+        "l-countdown": "/miniprogram_npm/lin-ui/countdown/index"
     }
 }

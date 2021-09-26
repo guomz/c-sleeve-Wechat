@@ -4,7 +4,7 @@ import { Order } from '../../model/order'
 import {Coupon} from '../../model/coupon'
 import {CouponBo} from '../../model/coupon-bo'
 import { OrderPost } from '../../model/order-post'
-import { ShoppingWay } from '../../core/enum'
+import { OrderStatus, ShoppingWay } from '../../core/enum'
 import { Sku } from '../../model/sku'
 import { CartItem } from '../../model/cart-item'
 
@@ -33,6 +33,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     async onLoad(options) {
+        wx.lin.showLoading({
+            type: 'flash',
+            fullScreen: true
+        })
+        
         const type= options.type
         let orderItems = []
         if(type == ShoppingWay.BUY){
@@ -75,6 +80,7 @@ Page({
             totalPrice: order.totalPrice,
             finalTotalPrice: order.totalPrice
         })
+        wx.lin.hideLoading()
     },
 
     //生成订单商品
@@ -154,7 +160,7 @@ Page({
             })
             //跳转到成功页面
             wx.redirectTo({
-                url: '/pages/pay-success/pay-success',
+                url: '/pages/submit-success/submit-success?oid=' + placeResult.order_id,
             });
         }catch(e){
             //生成订单失败报错
@@ -166,7 +172,7 @@ Page({
             })
             //跳转到我的订单
             wx.redirectTo({
-                url:"/pages/my-order/my-order"
+                url:"/pages/my-order/my-order?status=" + OrderStatus.UNPAID
             })
         }
 

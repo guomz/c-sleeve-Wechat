@@ -10,6 +10,12 @@ class Coupon{
         })
     }
 
+    static async getMyCouponByStatus(status){
+        return await Http.request({
+            url: `/coupon/myself/by/status/${status}`
+        })
+    }
+
     static async getMyCouponsWithCategory(){
         return await Http.request({
             url: `/coupon/myself/available/with_category`

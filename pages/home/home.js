@@ -77,7 +77,8 @@ Page({
         }
         wx.lin.renderWaterFlow(pagingData.items)
         this.setData({
-            paging: latestPaging
+            paging: latestPaging,
+            loadMoreType: latestPaging.moreData? 'loading':'end'
         })
     },
 

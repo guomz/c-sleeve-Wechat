@@ -1,45 +1,29 @@
-import { CouponStatus } from "../../core/enum"
-import { Address } from "../../model/address"
-import { Coupon } from "../../model/coupon"
-
-// pages/my/my.js
+// pages/submit-success/submit-success.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        couponCount: null
+        orderId: null
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: async function (options) {
-        const coupons = await Coupon.getMyCouponByStatus(CouponStatus.AVAILABLE)
+    onLoad: function (options) {
+        const orderId = options.oid
         this.setData({
-            couponCount: coupons.length
+            orderId
         })
     },
 
-    onGotoMyOrder(detail){
+    //前往订单详情
+    onGotoOrderDetail(){
+        wx.redirectTo({
+            url: '/pages/order-detail/order-detail?oid=' + this.data.orderId,
 
-    },
-
-    onGotoMyCoupon(detail){
-
-    },
-
-    //选择地址
-    async onMgrAddress(detail){
-        const res = await wx.chooseAddress({});
-            if(res){
-                this.setData({
-                    address: res,
-                    hasChosen: true
-                })
-                Address.setAddress(res)
-            }
+        });
     },
 
     /**

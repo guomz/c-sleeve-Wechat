@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "g-order-sku-item": "/components/order-sku-item/index",
+    "g-order-address": "/components/order-address/index"
+
+  }
+}

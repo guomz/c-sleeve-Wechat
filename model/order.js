@@ -1,6 +1,7 @@
 import { Http } from '../utils/http'
 import  {accMultiply} from '../utils/number'
 import {accAdd} from '../utils/number'
+import { Paging } from '../utils/paging'
 
 class Order{
 
@@ -43,6 +44,35 @@ class Order{
             method: 'POST',
             refetch: true,
             throwError: true
+        })
+    }
+
+    //按照状态查询订单
+    static getOrderByPage(status){
+        return new Paging({
+            req: {
+                url: `/order/by/status/${status}`
+            },
+            start:0,
+            count: 5
+        })
+    }
+
+    //支付订单
+    static async payOrder(id){
+        return await Http.request({
+            url: `/order/pay/${id}`,
+            data: null,
+            method: 'POST',
+            refetch: true,
+            throwError: true
+        })
+    }
+
+    //获取订单详情
+    static async getOrderDetail(id){
+        return await Http.request({
+            url: `/order/detail/${id}`
         })
     }
 }
