@@ -29,7 +29,12 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: async function (options) {
+        wx.lin.showLoading({
+            type: 'flash',
+            fullScreen: true
+        })
         await this.initHomeData()
+        wx.lin.hideLoading()
     },
 
     async initHomeData(){
@@ -78,7 +83,6 @@ Page({
 
     //点击优惠券
     goCoupon(detail){
-        console.log(detail.detail)
         const themeName = detail.currentTarget.dataset.atheme
         wx.navigateTo({
             url: `/pages/coupon/coupon?theme=${themeName}&type=${CouponCenterType.ACTIVITY}`,
@@ -92,6 +96,20 @@ Page({
         wx.navigateTo({
             url: `/pages/spu-list/spu-list?cid=${cid}&type=${type}`,
         });
+    },
+
+    //点击主题跳转事件
+    onGoToTheme(detail){
+        const themeName = detail.currentTarget.dataset.tname
+        wx.navigateTo({
+            url: '/pages/theme/theme?tname=' + themeName,
+        });
+    },
+
+    //点击banner跳转事件
+    onGoToBanner(detail){
+        const keyword = detail.currentTarget.dataset.keyword
+        const tyoe = detail.currentTarget.dataset.type
     },
 
     /**

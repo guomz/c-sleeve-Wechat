@@ -1,4 +1,6 @@
 // pages/theme/theme.js
+import {Theme} from '../../model/theme'
+
 Page({
 
     /**
@@ -11,8 +13,12 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
-
+    onLoad: async function (options) {
+        const themeName = options.tname
+        console.log(themeName)
+        const theme = new Theme()
+        const themeWithSpu = await theme.getThemeSpuByName(themeName)
+        wx.lin.renderWaterFlow(themeWithSpu.spu_list)
     },
 
     /**

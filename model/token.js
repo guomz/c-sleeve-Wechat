@@ -1,15 +1,17 @@
+import { config } from '../config/config'
 import {promisic} from '../miniprogram_npm/lin-ui/utils/util'
 
 class Token{
-    getTokenUrl = 'http://localhost:8080/v1/token'
-    verifyTokenUrl = 'http://localhost:8080/v1/token/verify'
+    getTokenUrl = '/token'
+    verifyTokenUrl = '/token/verify'
 
+    //获取新的token
     async getToken(){
         const r = await wx.login()
         const code = r.code
 
         const res = await promisic(wx.request)({
-            url: this.getTokenUrl,
+            url: config.tokenBaseUrl + this.getTokenUrl,
             method: 'POST',
             data: {
                 account: code,
@@ -20,6 +22,7 @@ class Token{
         return res.data.token
     }
 
+    //验证token，如果失效则重新获取
     async verifyToken(){
         let token = wx.getStorageSync('token');
         if(!token){
@@ -32,7 +35,7 @@ class Token{
 
     async verifyFromServer(token){
         const res = await promisic(wx.request)({
-            url: this.verifyTokenUrl,
+            url: config.tokenBaseUrl + this.verifyTokenUrl,
             method: 'POST',
             data: {
                 token

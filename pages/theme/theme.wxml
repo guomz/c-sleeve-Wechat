@@ -4,6 +4,6 @@
         <text>- 更多推荐 -</text>
     </view>
     <view class="for-you-spu">
-        <l-water-flow bind:item="onItemTap" generic:l-water-flow-item="g-spu-preview"></l-water-flow>
+        <l-water-flow generic:l-water-flow-item="g-spu-preview"></l-water-flow>
     </view>
 </view>

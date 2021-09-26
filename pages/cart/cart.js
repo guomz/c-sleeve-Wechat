@@ -18,9 +18,14 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        wx.lin.showLoading({
+            type: 'flash',
+            fullScreen: true
+        })
         //刷新服务器sku数据
         const cart = new Cart()
         cart.refreshCartSkuWithServer()
+        wx.lin.hideLoading()
     },
 
     /**

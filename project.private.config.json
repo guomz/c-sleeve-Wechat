@@ -53,6 +53,12 @@
                     "pathName": "pages/coupon/coupon",
                     "query": "theme=a-2&type=activity",
                     "scene": null
+                },
+                {
+                    "name": "我的页面",
+                    "pathName": "pages/my/my",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

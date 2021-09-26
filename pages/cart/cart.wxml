@@ -30,3 +30,4 @@
 </view>
 
 <view style="height: 100rpx"></view>
+<l-loading></l-loading>

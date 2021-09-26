@@ -1,22 +1,23 @@
 <!--pages/home/home.wxml-->
 <view>
-    <image class="top-theme" src="{{topThemeA.entrance_img}}"></image>
+    <image class="top-theme" src="{{topThemeA.entrance_img}}" data-tname="t-1" bind:tap="onGoToTheme"></image>
     <swiper class="swiper" autoplay="{{true}}" indicator-dots="{{true}}" circular="{{true}}">
         <block wx:for="{{bannerB.items}}">
             <swiper-item>
-                <image class="swiper" src="{{item.img}}"/>
+                <image class="swiper" src="{{item.img}}" data-type="{{item.type}}" data-keyword="{{item.keyword}}" bind:tap="onGoToBanner"/>
             </swiper-item>
         </block>
     </swiper>
     <g-category-grid grid="{{categoryGrid}}" bind:gridtap="gridTap"></g-category-grid>
     <image class="activity" src="{{activityD.entrance_img}}" bind:tap="goCoupon" data-atheme="a-2"/>
     <g-spu-scroll spuList="{{themeESpuList}}" theme="{{topThemeE}}"></g-spu-scroll>
-    <image src="{{topThemeF.entrance_img}}" class="quality" />
+    <image data-tname="t-3" bind:tap="onGoToTheme" src="{{topThemeF.entrance_img}}" class="quality" />
     <g-hot-list banner="{{bannerG}}"></g-hot-list>
-    <image class="fashion" src="{{topThemeH.entrance_img}}" />
+    <image class="fashion" data-tname="t-4" bind:tap="onGoToTheme" src="{{topThemeH.entrance_img}}" />
     <view class="spu-bottom">
         <image class="title-spu-bottom" src="{{}}" />
         <l-water-flow generic:l-water-flow-item="g-spu-preview"></l-water-flow>
     </view>
     <l-loadmore show="{{true}}" type="{{loadMoreType}}"></l-loadmore>
 </view>
+<l-loading id="home-loading"></l-loading>

@@ -60,6 +60,7 @@ class Http{
 
     //重发请求
     static async _refetch(data) {
+        //获取新的token再重发请求
         const token = new Token()
         await token.getToken()
         //防止多次重发
