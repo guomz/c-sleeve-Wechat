@@ -1,4 +1,4 @@
-import { CouponStatus } from "../../core/enum"
+import { CouponStatus, OrderStatus } from "../../core/enum"
 import { Address } from "../../model/address"
 import { Coupon } from "../../model/coupon"
 
@@ -22,12 +22,18 @@ Page({
         })
     },
 
+    //前往我的订单
     onGotoMyOrder(detail){
-
+        wx.navigateTo({
+            url: '/pages/my-order/my-order?status='+ OrderStatus.ALL,
+        });
     },
 
+    //前往我的优惠券
     onGotoMyCoupon(detail){
-
+        wx.navigateTo({
+            url: '/pages/my-coupon/my-coupon',
+        });
     },
 
     //选择地址

@@ -54,6 +54,7 @@ Component({
             return !!userInfo;
         },
 
+        //前往我的优惠券
         onGotoMyCoupon(event) {
             wx.navigateTo({
                 url:`/pages/my-coupon/my-coupon`

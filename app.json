@@ -17,7 +17,8 @@
         "pages/my-order/my-order",
         "pages/about/about",
         "pages/order-detail/order-detail",
-        "pages/submit-success/submit-success"
+        "pages/submit-success/submit-success",
+        "pages/my-coupon/my-coupon"
     ],
     "window": {
         "backgroundTextStyle": "light",

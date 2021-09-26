@@ -22,13 +22,14 @@ Component({
     },
 
     observers: {
-        'coupon': function (coupon) {
+        'coupon,status': function (coupon,status) {
             console.log(coupon)
             if (!coupon) {
                 return
             }
             this.setData({
                 _coupon: new CouponData(coupon),
+                _status: status? status: CouponStatus.CAN_COLLECT
             })
         }
     },

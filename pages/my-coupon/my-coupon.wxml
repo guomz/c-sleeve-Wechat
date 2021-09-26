@@ -1,0 +1,18 @@
+<!--pages/my-coupon/my-coupon.wxml-->
+<l-segment class="segment"
+           bind:linchange="onSegmentChange"
+           l-class="l-segment"
+           active-color="#157658"
+           l-class-active="active"
+           l-class-line="line"
+           active-key="{{activeKey}}">
+    <l-segment-item tab="未使用" key="1"></l-segment-item>
+    <l-segment-item tab="已使用" key="2"></l-segment-item>
+    <l-segment-item tab="已过期" key="3"></l-segment-item>
+</l-segment>
+
+<view class="container">
+    <block wx:for="{{coupons}}">
+        <g-coupon coupon="{{item}}" status="{{status}}"></g-coupon>
+    </block>
+</view>

@@ -30,6 +30,9 @@ Page({
     //选项卡切换事件
     async onSegmentChange(detail){
         const status = detail.detail.activeKey
+        this.setData({
+            activeKey: status
+        })
         await this.getOrderByStatus(status)
     },
 
