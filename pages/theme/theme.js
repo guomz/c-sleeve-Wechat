@@ -18,7 +18,9 @@ Page({
         console.log(themeName)
         const theme = new Theme()
         const themeWithSpu = await theme.getThemeSpuByName(themeName)
-        wx.lin.renderWaterFlow(themeWithSpu.spu_list)
+        if(themeWithSpu.spu_list){
+            wx.lin.renderWaterFlow(themeWithSpu.spu_list)
+        }
     },
 
     /**

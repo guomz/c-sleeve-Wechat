@@ -1,3 +1,5 @@
+import { Theme } from "../../model/theme"
+
 // pages/theme-spu-list/theme-spu-list.js
 Page({
 
@@ -5,14 +7,35 @@ Page({
      * 页面的初始数据
      */
     data: {
+        topImg: null,
+        descriptions: [],
 
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: async function (options) {
+        const themeName = options.tname
+        const theme = new Theme()
+        const themeWithSpu = await theme.getThemeSpuByName(themeName)
+        this.setData({
+            topImg: themeWithSpu.internal_top_img,
+            descriptions: themeWithSpu.description.split('#')
+        })
+        if(themeWithSpu.spu_list){
+            wx.lin.renderWaterFlow(themeWithSpu.spu_list)
+        }
+    },
 
+    //图片加载
+    onLoadImg(event) {
+        const {height, width} = event.detail
+        console.log(height,width)
+        this.setData({
+            h: height,
+            w: width,
+        })
     },
 
     /**

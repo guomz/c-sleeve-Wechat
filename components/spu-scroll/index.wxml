@@ -1,11 +1,11 @@
 <!--components/spu-scroll/index.wxml-->
 <wxs src="/miniprogram_npm/lin-ui/filter/string.wxs" module="s"></wxs>
 <view class="container">
-    <image class="title" src="{{theme.title_img}}"/>
+    <image class="title" src="{{theme.title_img}}" bind:tap="onMore"/>
     <scroll-view scroll-x="{{true}}" class="scroll-view">
         <view class="inner">
             <block  wx:for="{{spuList}}">
-                <view class="spu-container">
+                <view data-id="{{item.id}}" bind:tap="onTap" class="spu-container">
                     <image class="spu-img" src="{{item.img}}" />
                     <l-price value="{{item.price}}"
                     l-value-class="price-value"

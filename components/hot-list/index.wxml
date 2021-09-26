@@ -1,10 +1,14 @@
 <view class="container">
-    <image class="title" src="{{banner.img}}" />
+    <image data-tname="t-5" bind:tap="onGotToTheme" class="title" src="{{banner.img}}" />
     <view class="inner-container">
-        <image class="left" src="{{left.img}}" />
+        <image class="left" src="{{left.img}}" data-keyword="{{left.keyword}}" data-type="{{left.type}}"  bind:tap="onGotoDetail"/>
         <view class="right-container">
-            <image class="right-size" src="{{rightTop.img}}" />
-            <image class="right-size" src="{{rightBottom.img}}" />
+            <image class="right-size" src="{{rightTop.img}}" data-keyword="{{rightTop.keyword}}"
+                       data-type="{{rightTop.type}}"
+                       bind:tap="onGotoDetail"/>
+            <image class="right-size" src="{{rightBottom.img}}" data-keyword="{{rightBottom.keyword}}"
+                       data-type="{{rightBottom.type}}"
+                       bind:tap="onGotoDetail"/>
         </view>
     </view>
 </view>

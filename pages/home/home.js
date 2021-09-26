@@ -109,7 +109,8 @@ Page({
     //点击banner跳转事件
     onGoToBanner(detail){
         const keyword = detail.currentTarget.dataset.keyword
-        const tyoe = detail.currentTarget.dataset.type
+        const type = detail.currentTarget.dataset.type
+        Banner.goToTarget(type, keyword)
     },
 
     /**
