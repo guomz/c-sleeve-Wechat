@@ -56,6 +56,8 @@ class Cart{
             let item = cartItems[i]
             if(item && item.checked){
                 cartItems.splice(i,1)
+                //减一避免移除元素后数组长度变化造成的遍历不完全
+                i--
             }
         }
         this._refreshCartData()
