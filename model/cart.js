@@ -49,6 +49,18 @@ class Cart{
         }
     }
 
+    //提交订单后清除购物车已选商品
+    clearCheckedItems(){
+        const cartItems = this.getAllCartItems()
+        for(let i = 0; i < cartItems.length; i ++){
+            let item = cartItems[i]
+            if(item && item.checked){
+                cartItems.splice(i,1)
+            }
+        }
+        this._refreshCartData()
+    }
+
     //获取全部被选中的商品
     getAllCheckedItems(){
         const cartItems = this.getAllCartItems()

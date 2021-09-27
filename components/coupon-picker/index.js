@@ -13,7 +13,7 @@ Component({
      */
     data: {
         _coupons: [],
-        satisfactionCount: null
+        satisfactionCount: 0
     },
 
     observers: {
@@ -26,7 +26,7 @@ Component({
             console.log(couponsView)
             this.setData({
                 _coupons: couponsView,
-                satisfactionCount
+                satisfactionCount: satisfactionCount? satisfactionCount:0
             })
         }
     },

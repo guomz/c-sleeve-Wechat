@@ -148,16 +148,25 @@ Page({
         })
         const order = this.data.order
         const currentCoupon = this.data.currentCoupon
+        //组装订单参数
         const orderPost = new OrderPost(order.totalPrice, this.data.finalTotalPrice, 
             currentCoupon? currentCoupon.id: null, skuInfoList, this.data.address)
         //执行下单请求
         try{
+            wx.lin.showLoading({
+                type: 'flash',
+                fullScreen: true
+            })
             const placeResult = await Order.placeOrder(orderPost)
             console.log(placeResult)
             //下单后禁用提交订单按钮
             this.setData({
                 submitBtnDisable: true
             })
+            //清除购物车勾选的物品
+            cart.clearCheckedItems()
+
+            wx.lin.hideLoading()
             //跳转到成功页面
             wx.redirectTo({
                 url: '/pages/submit-success/submit-success?oid=' + placeResult.order_id,
