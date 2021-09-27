@@ -18,26 +18,26 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        wx.lin.showLoading({
-            type: 'flash',
-            fullScreen: true
-        })
         //刷新服务器sku数据
         const cart = new Cart()
         cart.refreshCartSkuWithServer()
-        wx.lin.hideLoading()
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        wx.lin.showLoading({
+            type: 'flash',
+            fullScreen: true
+        })
         const cart = new Cart()
         this.setData({
             cartItems: cart.getAllCartItems()
         })
         //刷新价格
         this.refreshCountAndPrice()
+        wx.lin.hideLoading()
     },
 
     //处理购物车中某个商品被选中/反选事件
@@ -98,6 +98,13 @@ Page({
     onSettle(){
         wx.navigateTo({
             url: `/pages/order/order?type=${ShoppingWay.CART}`,
+        });
+    },
+
+    //前往分类页面
+    goToCategory(detail){
+        wx.switchTab({
+            url: '/pages/category/category',
         });
     },
 

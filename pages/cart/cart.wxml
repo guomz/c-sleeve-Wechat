@@ -1,5 +1,5 @@
 <!--pages/cart/cart.wxml-->
-<l-status-show show = "{{cartItems.length == 0}}" type='cart'></l-status-show>
+<l-status-show show = "{{cartItems.length == 0}}" type='cart' bind:lintap="goToCategory"></l-status-show>
 <view wx:if="{{cartItems.length != 0}}" class="container">
     <block wx:key="index" wx:for="{{cartItems}}">
         <g-cart-item bind:overflow="onOverflow" bind:itemDelete="onDeleteItem" bind:countfloat="onCountFloat" bind:selectSingle="onSingleCheck" cart-item="{{item}}">
