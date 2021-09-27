@@ -5,7 +5,8 @@
             bg-color="#f1f1f1"
             bind:linconfirm="onSearch"
             bind:lincancel="onCancel"
-            placeholder="输入商品名称">
+            placeholder="{{placeholder}}"
+            value="{{placeValue}}">
     </l-search-bar>
 </view>
 

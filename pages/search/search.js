@@ -14,7 +14,9 @@ Page({
         historyTags: [],
         hotTags: [],
         loadingType: 'loading',
-        paging: null
+        paging: null,
+        placeholder: '请输入商品名称',
+        placeValue: null
     },
 
     /**
@@ -46,7 +48,8 @@ Page({
             search: true,
             items: searchResult.currentData,
             paging,
-            loadingType: paging.moreData? 'loading':'end'
+            loadingType: paging.moreData? 'loading':'end',
+            placeValue: keyword
         })
 
     },
