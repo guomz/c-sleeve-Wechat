@@ -31,6 +31,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: async function (options) {
+        wx.lin.showLoading({
+            type: 'flash',
+            fullScreen: true
+        })
         const spu = await Spu.getSpuDetail(options.id)
         const explain = await SaleExplain.getSaleExplainText()
         const windowHeightRpx = await getWindowHeightRpx()
@@ -41,6 +45,8 @@ Page({
             h: windowHeightRpx- 100,
             coupons
         })
+
+        wx.lin.hideLoading()
     },
 
     //前往优惠券页面

@@ -60,3 +60,5 @@ bind:buy="onBuy"
 cart-item-count="{{cartItemsCount}}">
     
 </g-tabbar>
+
+<l-loading ></l-loading>
