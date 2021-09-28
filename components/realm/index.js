@@ -110,7 +110,7 @@ Component({
                 title: spu.title,
                 price: spu.price,
                 discount: spu.discount_price,
-                stock: spu.sku_list[0].stock
+                // stock: spu.sku_list[0].stock
             })
         },
 
