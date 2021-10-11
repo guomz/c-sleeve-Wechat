@@ -70,20 +70,6 @@ class CouponBo{
                     discountMoney: couponObj.minus
                 }
             case CouponType.FULL_OFF:
-                // let categoryTotalPrice;
-                // if (couponObj.wholeStore) {
-                //     // 全场券无视适用分类
-                //     categoryTotalPrice = order.totalPrice
-                // } else {
-                //     const categoryIds = couponObj.categories.map(category => {
-                //         return category.id
-                //     })
-                //     categoryTotalPrice = order.getTotalPriceByCategoryIdList(categoryIds)
-                // }
-                // const discountRate = accSubtract(1, couponObj.rate)
-                // const discountMoney = accMultiply(categoryTotalPrice, discountRate)
-                // const actualPrice = accSubtract(order.totalPrice, discountMoney)
-                // finalPrice = CouponBO.roundMoney(actualPrice)
                 let actualPrice = accMultiply(order.totalPrice, couponObj.rate)
                 finalPrice = CouponBo.roundMoney(actualPrice)
                 return {
@@ -96,6 +82,13 @@ class CouponBo{
                 return {
                     finalPrice,
                     discountMoney: couponObj.minus
+                }
+             case CouponType.NO_THRESHOLD_OFF:
+                let actualPrice = accMultiply(order.totalPrice, couponObj.rate)
+                finalPrice = CouponBo.roundMoney(actualPrice)
+                return {
+                    finalPrice,
+                    discountMoney: accSubtract(order.totalPrice, finalPrice)
                 }
         }
     }
