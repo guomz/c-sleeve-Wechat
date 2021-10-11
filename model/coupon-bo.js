@@ -70,6 +70,7 @@ class CouponBo{
                     discountMoney: couponObj.minus
                 }
             case CouponType.FULL_OFF:
+            case CouponType.NO_THRESHOLD_OFF:
                 let actualPrice = accMultiply(order.totalPrice, couponObj.rate)
                 finalPrice = CouponBo.roundMoney(actualPrice)
                 return {
@@ -83,13 +84,13 @@ class CouponBo{
                     finalPrice,
                     discountMoney: couponObj.minus
                 }
-             case CouponType.NO_THRESHOLD_OFF:
-                let actualPrice = accMultiply(order.totalPrice, couponObj.rate)
-                finalPrice = CouponBo.roundMoney(actualPrice)
-                return {
-                    finalPrice,
-                    discountMoney: accSubtract(order.totalPrice, finalPrice)
-                }
+            //  case CouponType.NO_THRESHOLD_OFF:
+            //     let actualPrice = accMultiply(order.totalPrice, couponObj.rate)
+            //     finalPrice = CouponBo.roundMoney(actualPrice)
+            //     return {
+            //         finalPrice,
+            //         discountMoney: accSubtract(order.totalPrice, finalPrice)
+            //     }
         }
     }
 
